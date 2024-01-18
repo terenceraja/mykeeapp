@@ -1,17 +1,43 @@
-.nav-menu {
+/*SIDE BAR*/
+.nav-bar {
   background-color: aqua;
   height: 100vh;
   min-width: 300px;
   box-sizing: content-box;
 }
+/**/
 
-.nav-menu-items {
+/*LIST CONTAINER*/
+.nav-rows-container {
   list-style-type: none;
   width: 100%;
   margin: 0;
   padding: 0;
 }
+/**/
 
-.nav-text a {
-  text-decoration: none;
+/*ROW MENU*/
+.nav-rows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
 }
+/**/
+
+/*LINK TAG*/
+a {
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+/**/
+
+a:hover {
+  background-color: brown;
+}
+/**/

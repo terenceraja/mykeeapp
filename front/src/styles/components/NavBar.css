@@ -1,0 +1,16 @@
+.nav-menu {
+  background-color: aqua;
+  height: 100vh;
+  width: 300px;
+}
+
+.nav-menu-items {
+  list-style-type: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-text a {
+  text-decoration: none;
+}

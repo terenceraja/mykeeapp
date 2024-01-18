@@ -1,9 +1,9 @@
-import React from 'react'
+import "../styles/pages/Cons.css";
+
+import React from "react";
 
 const Cons = () => {
-  return (
-    <div>Cons</div>
-  )
-}
+  return <div className="content">Cons</div>;
+};
 
-export default Cons
+export default Cons;

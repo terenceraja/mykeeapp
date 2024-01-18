@@ -1,22 +1,25 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { NavBarData } from "../data/NavBarData";
+import { Link } from "react-router-dom";
 
-const NavBar = () => {
+import "../styles/components/NavBar.css";
+
+const NavBar2 = () => {
+  const navList = NavBarData.map((item) => {
+    return (
+      <li key={item.title} className={item.cName}>
+        <Link to={item.path}>
+          <span>{item.title}</span>
+        </Link>
+      </li>
+    );
+  });
+
   return (
-    <Sidebar>
-      <Menu>
-        <MenuItem> ACCUEIL </MenuItem>
-        <MenuItem> CONSOLIDATIONS </MenuItem>
-        <MenuItem> PORTEFEUILLES </MenuItem>
-        <MenuItem> MOUVEMENTS </MenuItem>
-        <MenuItem> DOCUMENTS </MenuItem>
-        <MenuItem> QUESTIONNAIRE </MenuItem>
-        <MenuItem> NEWSLETTER </MenuItem>
-        <MenuItem> MESSAGERIE </MenuItem>
-      </Menu>
-    </Sidebar>
+    <nav className="nav-menu">
+      <ul className="nav-menu-items">{navList}</ul>
+    </nav>
   );
 };
 
-export default NavBar;
+export default NavBar2;

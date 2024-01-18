@@ -1,9 +1,8 @@
-import React from 'react'
+import "../styles/pages/Ptf.css";
+import React from "react";
 
 const Ptf = () => {
-  return (
-    <div>Ptf</div>
-  )
-}
+  return <div className="content">Ptf</div>;
+};
 
-export default Ptf
+export default Ptf;

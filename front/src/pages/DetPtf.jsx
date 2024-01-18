@@ -1,9 +1,9 @@
-import React from 'react'
+import "../styles/pages/DetPtf.css";
+
+import React from "react";
 
 const DetPtf = () => {
-  return (
-    <div>DetPtf</div>
-  )
-}
+  return <div className="content">DetPtf</div>;
+};
 
-export default DetPtf
+export default DetPtf;

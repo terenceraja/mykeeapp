@@ -1,9 +1,8 @@
-import React from 'react'
+import "../styles/pages/Mvt.css";
+import React from "react";
 
 const Mvt = () => {
-  return (
-    <div>Mvt</div>
-  )
-}
+  return <div className="content">Mvt</div>;
+};
 
-export default Mvt
+export default Mvt;

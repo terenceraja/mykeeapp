@@ -1,7 +1,8 @@
 .nav-menu {
   background-color: aqua;
   height: 100vh;
-  width: 300px;
+  min-width: 300px;
+  box-sizing: content-box;
 }
 
 .nav-menu-items {

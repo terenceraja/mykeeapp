@@ -9,7 +9,7 @@ const NavBar = () => {
     return (
       <li key={item.title} className={item.cName}>
         <Link to={item.path}>
-          <img src={item.icon} alt="Logo" />
+          <img src={item.icon} width="30" alt="Logo" />
           <span>{item.title}</span>
         </Link>
       </li>

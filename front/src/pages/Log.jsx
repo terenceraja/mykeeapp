@@ -5,8 +5,22 @@ import { useState } from "react";
 import React from "react";
 
 const Log = () => {
-  const [login, setLogin] = useState("");
+  //FORM POST
+  const [form, setForm] = useState({
+    login: "",
+    password: "",
+  });
 
+  // INPUT ONCHANGE
+  const handleOnChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setForm((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+
+  //HANDLE LOGIN CLICK
   const handleLogin = () => {
     console.log("click");
   };
@@ -20,8 +34,18 @@ const Log = () => {
         </section>
 
         <section className="submit_section">
-          <input type="text" placeholder="Login" value={login} />
-          <input type="text" placeholder="Password" />
+          <input
+            onChange={(e) => handleOnChange(e)}
+            type="text"
+            placeholder="Login"
+            name="login"
+          />
+          <input
+            onChange={(e) => handleOnChange(e)}
+            type="text"
+            placeholder="Password"
+            name="password"
+          />
           <button onClick={() => handleLogin()}>LOGIN</button>
         </section>
       </div>

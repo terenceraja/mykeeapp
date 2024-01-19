@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 /*FULL PAGE CONTAINER*/
@@ -16,6 +17,7 @@ body {
   width: 100%;
   background-color: #f2f4f3;
   padding: 12px;
+  box-sizing: border-box;
 }
 
 /*TEXTS*/

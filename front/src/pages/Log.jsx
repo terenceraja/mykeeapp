@@ -1,4 +1,4 @@
-import "../styles/pages/Log.css";
+import styles from "../styles/pages/Log.module.css";
 import logo from "../assets/myKeeApp.png";
 import { useState } from "react";
 
@@ -26,14 +26,14 @@ const Log = () => {
   };
 
   return (
-    <div className="content">
-      <div className="log_card">
-        <section className="logo_section">
-          <img src={logo} alt="logo" id="logo" />
+    <div className={styles.content}>
+      <div className={styles.log_card}>
+        <section className={styles.logo_section}>
+          <img src={logo} alt="logo" id={styles.logo} />
           <h3>Welcome to MyKeeApp</h3>
         </section>
 
-        <section className="submit_section">
+        <form className={styles.submit_section}>
           <input
             onChange={(e) => handleOnChange(e)}
             type="text"
@@ -42,12 +42,12 @@ const Log = () => {
           />
           <input
             onChange={(e) => handleOnChange(e)}
-            type="text"
+            type="password"
             placeholder="Password"
             name="password"
           />
           <button onClick={() => handleLogin()}>LOGIN</button>
-        </section>
+        </form>
       </div>
     </div>
   );

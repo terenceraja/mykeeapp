@@ -1,1 +1,74 @@
+/*CONTENT PAGE*/
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+/**/
 
+/*LOGIN CARD*/
+.log_card {
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+  width: 320px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 40px;
+  justify-content: center;
+  gap: 50px;
+}
+/**/
+
+/*TOP SECITON LOGIN CARD*/
+
+.logo_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#logo {
+  width: 100%;
+}
+/**/
+
+/*BOT SECITON LOGIN CARD*/
+.submit_section {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+input {
+  height: 50px;
+  width: 100%;
+  padding: 0px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border: 1px;
+  text-align: center;
+  border: 0.5px solid rgb(233, 233, 233);
+  border-radius: 6px;
+}
+
+input:focus-visible {
+  border: 0.5px solid rgb(160, 160, 160);
+  transition: border 0.4s ease, box-shadow 0.5s ease;
+}
+
+button {
+  height: 50px;
+  width: 100%;
+  padding: 0px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border: 0px;
+  background-color: #ef8026;
+  border-radius: 6px;
+}
+/**/

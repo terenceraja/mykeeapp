@@ -1,7 +1,6 @@
 /*SIDE BAR*/
-.nav-bar {
+.nav_Bar {
   background-color: #9e9fa1;
-  height: 100vh;
   min-width: 150px;
   box-sizing: content-box;
   padding: 12px 10px;
@@ -9,7 +8,7 @@
 /**/
 
 /*LIST CONTAINER*/
-.nav-rows-container {
+.nav_rows_container {
   list-style-type: none;
   width: 100%;
   margin: 0;
@@ -18,7 +17,7 @@
 /**/
 
 /*ROW MENU*/
-.nav-rows {
+.nav_row {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,10 +43,11 @@ a:hover h2 {
 /**/
 
 /*ICON*/
-img {
+.icons {
   filter: brightness(0) invert(1);
   padding: 0px 7px;
   margin-right: 5px;
+  width: 16px;
 }
 
 a:hover img {

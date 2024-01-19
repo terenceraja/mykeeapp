@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import "../styles/components/NavBar.css";
 
 const NavBar = () => {
-  const navList = NavBarData.map((item) => {
+  const navList = NavBarData.map((item, key) => {
     return (
-      <li key={item.title} className={item.cName}>
+      <li key={key} className={item.cName}>
         <Link to={item.path}>
-          <img src={item.icon} width="16" alt="Logo" />
+          <img src={item.icon} className="icons" alt="navLogo" />
           <h2>{item.label}</h2>
         </Link>
       </li>
@@ -17,8 +17,8 @@ const NavBar = () => {
   });
 
   return (
-    <nav className="nav-bar">
-      <ul className="nav-rows-container">{navList}</ul>
+    <nav className="nav_Bar">
+      <ul className="nav_rows_container">{navList}</ul>
     </nav>
   );
 };

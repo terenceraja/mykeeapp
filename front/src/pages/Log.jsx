@@ -1,26 +1,28 @@
 import "../styles/pages/Log.css";
 import logo from "../assets/myKeeApp.png";
+import { useState } from "react";
 
 import React from "react";
 
 const Log = () => {
+  const [login, setLogin] = useState("");
+
+  const handleLogin = () => {
+    console.log("click");
+  };
+
   return (
     <div className="content">
       <div className="log_card">
         <section className="logo_section">
-          <img
-            src="https://ucarecdn.com/149afb0a-b8c2-4c32-bc6a-6a80628e4506/"
-            alt="logo"
-            width={500}
-            id="logo"
-          />
-          <span>Welcome to MyKeeApp</span>
+          <img src={logo} alt="logo" id="logo" />
+          <h3>Welcome to MyKeeApp</h3>
         </section>
 
         <section className="submit_section">
-          <input type="text" placeholder="Login" />
+          <input type="text" placeholder="Login" value={login} />
           <input type="text" placeholder="Password" />
-          <button>LOGIN</button>
+          <button onClick={() => handleLogin()}>LOGIN</button>
         </section>
       </div>
     </div>

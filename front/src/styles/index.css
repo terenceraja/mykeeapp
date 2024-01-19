@@ -3,12 +3,46 @@ body {
   padding: 0;
 }
 
+/*FULL PAGE CONTAINER*/
 .main {
   display: flex;
   width: 100vw;
   height: 100vh;
 }
+/**/
+
+/*FULL CONTENT CONTAINER*/
+.outlet {
+  width: 100%;
+  background-color: #f2f4f3;
+  padding: 12px;
+}
+
+/*TEXTS*/
+
+/*NAVBAR*/
+h2 {
+  font-size: 11px;
+  color: white;
+  font-family: "Exo";
+  margin: 0px;
+}
+
+/*LOGIN LOGO*/
+h3 {
+  font-size: 18px;
+  color: #ef8026;
+  font-family: "Exo";
+  margin: 0px;
+}
+/**/
+
+/* INPUT PLACEHOLDER ON CLICK ERASE*/
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
 
 :focus-visible {
   outline: none;
 }
+/**/

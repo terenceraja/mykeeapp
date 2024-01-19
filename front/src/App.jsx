@@ -1,4 +1,3 @@
-import "./styles/App.css";
 // ROUTE DEFINITION
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 

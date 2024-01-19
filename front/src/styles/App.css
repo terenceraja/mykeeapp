@@ -1,0 +1,14 @@
+/*FULL CONTENT CONTAINER*/
+.content {
+  width: 100%;
+  background-color: #f2f4f3;
+}
+
+/*NAV BAR TEXT*/
+h2 {
+  font-size: 11px;
+  color: white;
+  font-family: "Exo";
+  margin: 0px;
+}
+/**/

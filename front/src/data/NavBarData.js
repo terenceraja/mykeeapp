@@ -8,12 +8,12 @@ import news from "../assets/news.svg";
 import chat from "../assets/chat.svg";
 
 export const NavBarData = [
-  { title: "ACCUEIL", path: "/", icon: home, cName: "nav-rows" },
-  { title: "CONSOLIDATION", path: "/cons", icon: cons, cName: "nav-rows" },
-  { title: "PORTEFEUILLES", path: "/ptf", icon: ptf, cName: "nav-rows" },
-  { title: "MOUVEMENTS", path: "mvt", icon: mvt, cName: "nav-rows" },
-  { title: "DOCUMENTS", path: "", icon: doc, cName: "nav-rows" },
-  { title: "QUESTIONNAIRE", path: "", icon: quest, cName: "nav-rows" },
-  { title: "NEWSLETTER", path: "", icon: news, cName: "nav-rows" },
-  { title: "MESSAGERIE", path: "", icon: chat, cName: "nav-rows" },
+  { label: "ACCUEIL", path: "/", icon: home, cName: "nav-rows" },
+  { label: "CONSOLIDATION", path: "/cons", icon: cons, cName: "nav-rows" },
+  { label: "PORTEFEUILLES", path: "/ptf", icon: ptf, cName: "nav-rows" },
+  { label: "MOUVEMENTS", path: "mvt", icon: mvt, cName: "nav-rows" },
+  { label: "DOCUMENTS", path: "", icon: doc, cName: "nav-rows" },
+  { label: "QUESTIONNAIRE", path: "", icon: quest, cName: "nav-rows" },
+  { label: "NEWSLETTER", path: "", icon: news, cName: "nav-rows" },
+  { label: "MESSAGERIE", path: "", icon: chat, cName: "nav-rows" },
 ];

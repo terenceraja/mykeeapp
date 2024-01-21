@@ -10,6 +10,7 @@ const NavBar = () => {
       <li key={key} className={styles.nav_row}>
         <Link to={item.path}>
           <img src={item.icon} className={styles.icons} alt="navLogo" />
+
           <h2>{item.label}</h2>
         </Link>
       </li>

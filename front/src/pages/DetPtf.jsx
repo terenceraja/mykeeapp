@@ -1,4 +1,4 @@
-import "../styles/pages/DetPtf.css";
+import "../styles/pages/DetPtf.module.css";
 
 import React from "react";
 

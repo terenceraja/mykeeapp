@@ -1,4 +1,4 @@
-import "../styles/pages/Mvt.css";
+import "../styles/pages/Mvt.module.css";
 import React from "react";
 
 const Mvt = () => {

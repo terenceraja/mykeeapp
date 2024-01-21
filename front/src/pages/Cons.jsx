@@ -1,4 +1,4 @@
-import "../styles/pages/Cons.css";
+import "../styles/pages/Cons.module.css";
 
 import React from "react";
 

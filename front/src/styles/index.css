@@ -8,7 +8,7 @@ body {
 .main {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 /**/
 
@@ -48,3 +48,15 @@ input:focus::-webkit-input-placeholder {
   outline: none;
 }
 /**/
+
+/*CARD LABEL*/
+label {
+  background-color: #06171f;
+  color: white;
+  font-size: 18px;
+  font-family: "Exo", "serif";
+  font-weight: 700;
+  box-sizing: content-box;
+  padding: 5px;
+  border-radius: 4px;
+}

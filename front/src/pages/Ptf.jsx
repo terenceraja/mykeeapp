@@ -1,18 +1,17 @@
 import styles from "../styles/pages/Ptf.module.css";
 import React from "react";
 
-import Table from "../components/Table";
-import Chart from "../components/Chart";
+import Card from "../components/Card";
 
 const Ptf = () => {
   return (
     <div className={styles.content}>
-      <Table />
+      <Card title="table">content</Card>
       <section className={styles.charts_container}>
-        <Chart />
-        <Chart />
+        <Card title="chart" />
+        <Card title="chart" />
       </section>
-      <Table />
+      <Card title="table" />
     </div>
   );
 };

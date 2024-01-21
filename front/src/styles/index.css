@@ -7,14 +7,17 @@ body {
 /*FULL PAGE CONTAINER*/
 .main {
   display: flex;
-  width: 100vw;
+  width: auto;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 /**/
 
 /*FULL CONTENT CONTAINER*/
 .outlet {
+  display: flex;
   width: 100%;
+  height: auto;
   background-color: #f2f4f3;
   padding: 12px;
   box-sizing: border-box;
@@ -57,6 +60,12 @@ label {
   font-family: "Exo", "serif";
   font-weight: 700;
   box-sizing: content-box;
-  padding: 5px;
+  padding: 4px;
   border-radius: 4px;
+}
+
+/*CHART CANVAS RESPONSIVE SIZE*/
+canvas {
+  max-width: 100% !important;
+  max-height: 100% !important;
 }

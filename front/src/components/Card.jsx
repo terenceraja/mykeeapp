@@ -5,7 +5,7 @@ const Card = ({ title, children }) => {
   return (
     <div className={styles.card_container}>
       <label>{title}</label>
-      {children}
+      <div className={styles.content_container}>{children}</div>
     </div>
   );
 };

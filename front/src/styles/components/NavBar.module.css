@@ -37,11 +37,6 @@ a {
   border-radius: 5px;
 }
 
-/* a:hover {
-  background-color: #ef8026;
-  transition: background-color 0.4s ease, box-shadow 0.5s ease;
-} */
-
 a:hover h2 {
   color: #06171f;
   transition: color 0.3s ease, box-shadow 0.5s ease;

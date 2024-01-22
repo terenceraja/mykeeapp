@@ -1,8 +1,11 @@
 import styles from "../styles/pages/Log.module.css";
 import logo from "../assets/myKeeApp.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchGET, fetchPOST } from "../utils/http";
 
 import React from "react";
+
+const dummyForm = { login: "terence", password: "yolo" };
 
 const Log = () => {
   //FORM POST
@@ -10,6 +13,41 @@ const Log = () => {
     login: "",
     password: "",
   });
+
+  // FETCH STATES
+  const [isFetching, setIsFetching] = useState(false);
+  const [data, setData] = useState();
+  const [error, setError] = useState("");
+
+  // // GET FETCHING EXAMPLE
+  // useEffect(() => {
+  //   const fetchDataFromServer = async () => {
+  //     setIsFetching(true);
+
+  //     try {
+  //       const data = await fetchGET(); // Use the imported fetchData function
+  //       console.log(data);
+  //     } catch (error) {
+  //       setError({ message: error.message || "custom error message" });
+  //     } finally {
+  //       setIsFetching(false);
+  //     }
+  //   };
+
+  //   fetchDataFromServer(); // Call the renamed local function
+  // }, []);
+
+  // POST FETCHING EXAMPLE
+  const fetchDataFromServer = async () => {
+    setIsFetching(true);
+
+    try {
+      const response = await fetchPOST(form);
+      console.log(response);
+    } catch (error) {
+      setError({ message: error.message || "custom error message" });
+    }
+  };
 
   // INPUT ONCHANGE
   const handleOnChange = (e) => {
@@ -21,7 +59,9 @@ const Log = () => {
   };
 
   //HANDLE LOGIN CLICK
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+    fetchDataFromServer();
     console.log("click");
   };
 
@@ -33,20 +73,25 @@ const Log = () => {
           <h3>Welcome to MyKeeApp</h3>
         </section>
 
-        <form className={styles.submit_section}>
+        <form
+          className={styles.submit_section}
+          onSubmit={(e) => handleLogin(e)}
+        >
           <input
             onChange={(e) => handleOnChange(e)}
             type="text"
             placeholder="Login"
             name="login"
+            required
           />
           <input
             onChange={(e) => handleOnChange(e)}
             type="password"
             placeholder="Password"
             name="password"
+            required
           />
-          <button onClick={() => handleLogin()}>LOGIN</button>
+          <button>LOGIN</button>
         </form>
       </div>
     </div>

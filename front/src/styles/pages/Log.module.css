@@ -72,6 +72,8 @@ input:focus-visible {
 
 input:hover {
   cursor: pointer;
+  border: 0.5px solid rgb(160, 160, 160);
+  transition: border 0.4s ease, box-shadow 0.5s ease;
 }
 
 button {

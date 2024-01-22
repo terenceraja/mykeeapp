@@ -33,7 +33,7 @@ h2 {
   margin: 0px;
 }
 
-/*LOGIN LOGO*/
+/*LOGIN LOGO TEXT*/
 h3 {
   font-size: 18px;
   color: #ef8026;
@@ -42,11 +42,12 @@ h3 {
 }
 /**/
 
-/* INPUT PLACEHOLDER ON CLICK ERASE*/
+/* INPUT ERASE PLACEHOLDER ON CLICK*/
 input:focus::-webkit-input-placeholder {
   color: transparent;
 }
 
+/* INPUT THICK BORDER NONE ON CLICK*/
 :focus-visible {
   outline: none;
 }

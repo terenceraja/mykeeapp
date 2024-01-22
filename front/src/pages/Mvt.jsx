@@ -1,8 +1,9 @@
 import "../styles/pages/Mvt.module.css";
 import React from "react";
+import Card from "../components/Card";
 
 const Mvt = () => {
-  return <div className="content">Mvt</div>;
+  return <Card title="table">TABLE</Card>;
 };
 
 export default Mvt;

@@ -68,19 +68,19 @@ const dataTable = [
 const Ptf = () => {
   return (
     <div className={styles.content}>
-      <Card title="table">
+      <Card title="VOS PORTEFEUILLES">
         <ReactTabulator data={dataTable} columns={columns} layout={"fitData"} />
       </Card>
       <section className={styles.charts_container}>
-        <Card title="chart">
+        <Card title="CLASSES D'ACTIF">
           <Doughnut data={data} width={300} height={300} options={options} />
         </Card>
 
-        <Card title="chart">
+        <Card title="DEVISES">
           <Doughnut data={data} width={300} height={300} options={options} />
         </Card>
       </section>
-      <Card title="table">
+      <Card title="OPERATIONS">
         {" "}
         <ReactTabulator data={dataTable} columns={columns} layout={"fitData"} />
       </Card>

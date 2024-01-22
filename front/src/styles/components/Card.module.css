@@ -3,13 +3,14 @@
   flex-direction: column;
   width: 100%;
   height: auto;
-  background-color: aqua;
-  gap: 5px;
+  /* background-color: aqua; */
+  gap: 10px;
 }
 
 .content_container {
   position: relative;
-  background-color: bisque;
+  background-color: white;
   width: 100%;
   height: auto;
+  border-radius: 4px;
 }

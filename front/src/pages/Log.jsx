@@ -71,10 +71,14 @@ const Log = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const response = await fetchDataFromServer();
-    const IdCtraCli = response.IdCtraCli;
 
-    dispatch(addIdCrtaPTFToStore(IdCtraCli));
-    console.log("click");
+    if (response.IdCtraCli) {
+      console.log("yes");
+      // const IdCtraCli = response.IdCtraCli;
+    } else console.log("no");
+
+    // dispatch(addIdCrtaPTFToStore(IdCtraCli));
+    // console.log("click");
   };
 
   return (

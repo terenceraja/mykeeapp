@@ -1,24 +1,10 @@
 var express = require("express");
 var router = express.Router();
 
-const { zctracli } = require("../models"); // Import your Sequelize model
+const { zctracli, zctraptf } = require("../models"); // Import your Sequelize model
 
-router.get("/getUsers", async function (req, res, next) {
-  try {
-    // Perform a Sequelize query, fetching only the first 10 records from the zctracli table
-    const records = await zctracli.findAll({
-      limit: 10,
-    });
-
-    // Send the first 10 records as a JSON response
-    res.json({ data: records });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-router.post("/findUser", async function (req, res, next) {
+// ROUTE CLICK LOGIN
+router.post("/zctracli", async function (req, res, next) {
   try {
     const { login, password } = req.body;
 
@@ -35,6 +21,35 @@ router.post("/findUser", async function (req, res, next) {
     } else {
       res.json({ message: "User found !", IdCtraCli: user.IdCtraCli });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ROUTE CLICK LOGIN
+router.post("/zctraptf", async function (req, res, next) {
+  try {
+    const { IdCtraCli } = req.body;
+
+    // Assuming you have a foreign key relationship between zctraptf and zlignptf based on IdCtraPtf
+    const ptfs = await zctraptf.findAll({
+      where: {
+        IdCtraCli: IdCtraCli,
+      },
+      include: {
+        model: zlignptf,
+        where: {
+          EtatActiviteLign_lsn: 1,
+        },
+        order: [
+          ["LangueNomLocalAlloc_lmt", "ASC"],
+          ["IdAsset", "ASC"],
+        ],
+      },
+    });
+
+    res.json(ptfs); // Send the result as JSON
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

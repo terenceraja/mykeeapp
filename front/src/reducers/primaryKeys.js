@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: { idCrtaPTF: null, IdLigne: null },
+  value: { IdCtraCli: null, IdCrtaPTF: null, IdLigne: null },
 };
 
 export const keysSlice = createSlice({
@@ -9,8 +9,11 @@ export const keysSlice = createSlice({
 
   initialState,
   reducers: {
-    addIdCrtaPTFToStore: (state, action) => {
-      state.value.idCrtaPTF = action.payload;
+    addIdCtraCliToStore: (state, action) => {
+      state.value.IdCtraCli = action.payload;
+    },
+    addIdCtraPtfToStore: (state, action) => {
+      state.value.IdCrtaPTF = action.payload;
     },
 
     addIdLigneToStore: (state, action) => {
@@ -19,5 +22,6 @@ export const keysSlice = createSlice({
   },
 });
 
-export const { addIdCrtaPTFToStore, addIdLigneToStore } = keysSlice.actions;
+export const { addIdCtraPtfToStore, addIdLigneToStore, addIdCtraCliToStore } =
+  keysSlice.actions;
 export default keysSlice.reducer;

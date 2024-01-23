@@ -1,11 +1,14 @@
 import styles from "../styles/pages/Ptf.module.css";
 import React from "react";
-import { useState } from "react";
 
+import Card from "../components/Card";
+import { useSelector } from "react-redux";
+import { fetchPtf, fetchId } from "../utils/http";
+import { useState, useEffect } from "react";
+
+//CHARTJS & TABULATOR
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
-import Card from "../components/Card";
-
 import { ReactTabulator } from "react-tabulator";
 
 //CUSTOM DATA
@@ -66,6 +69,29 @@ const dataTable = [
 ];
 
 const Ptf = () => {
+  const [isFetching, setIsFetching] = useState(false);
+  const [resData, setResData] = useState(null);
+  const [error, setError] = useState("");
+  const IdCtraCli = useSelector((state) => state.keys.value.IdCtraCli);
+
+  console.log(resData);
+  // GET FETCHING EXAMPLE
+  useEffect(() => {
+    const fetchDataFromServer = async () => {
+      setIsFetching(true);
+
+      try {
+        const responsePtf = await fetchPtf({ IdCtraCli });
+        setResData(responsePtf.data);
+      } catch (error) {
+        setError({ message: error.message || "custom error message" });
+      } finally {
+        setIsFetching(false);
+      }
+    };
+
+    fetchDataFromServer(); // Call the renamed local function
+  }, []);
   return (
     <div className={styles.content}>
       <Card title="VOS PORTEFEUILLES">

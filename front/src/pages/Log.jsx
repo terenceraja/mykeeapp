@@ -1,9 +1,14 @@
+import React from "react";
 import styles from "../styles/pages/Log.module.css";
 import logo from "../assets/myKeeApp.png";
 import { useState, useEffect } from "react";
 import { fetchGET, fetchPOST } from "../utils/http";
 
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addIdCrtaPTFToStore,
+  addIdLigneToStore,
+} from "../reducers/primaryKeys";
 
 const dummyForm = { login: "terence", password: "yolo" };
 
@@ -18,6 +23,10 @@ const Log = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [data, setData] = useState();
   const [error, setError] = useState("");
+
+  const dispatch = useDispatch();
+  const keys = useSelector((state) => state.keys.value);
+  console.log(keys);
 
   // // GET FETCHING EXAMPLE
   // useEffect(() => {
@@ -43,7 +52,7 @@ const Log = () => {
 
     try {
       const response = await fetchPOST(form);
-      console.log(response);
+      return response;
     } catch (error) {
       setError({ message: error.message || "custom error message" });
     }
@@ -59,9 +68,12 @@ const Log = () => {
   };
 
   //HANDLE LOGIN CLICK
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    fetchDataFromServer();
+    const response = await fetchDataFromServer();
+    const IdCtraCli = response.IdCtraCli;
+
+    dispatch(addIdCrtaPTFToStore(IdCtraCli));
     console.log("click");
   };
 

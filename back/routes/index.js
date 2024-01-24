@@ -1,7 +1,14 @@
 var express = require("express");
 var router = express.Router();
 
-const { zctracli, zctraptf, zprestation, zope } = require("../models"); // Import your Sequelize model
+const {
+  zctracli,
+  zctraptf,
+  zprestation,
+  zope,
+  zlignptf,
+  zmvt,
+} = require("../models"); // Import your Sequelize model
 
 // ROUTE CLICK LOGIN GET ID USER
 router.post("/zctracli", async function (req, res, next) {
@@ -27,12 +34,11 @@ router.post("/zctracli", async function (req, res, next) {
   }
 });
 
-// ROUTE PTF PAGE RENDER POST USER ID AND GET PTFS
+// ROUTE ON PAGE PTF : POST USER ID AND GET PTFS
 router.post("/zctraptf", async function (req, res, next) {
   try {
     const { IdCtraCli } = req.body;
 
-    // Assuming you have a foreign key relationship between zctraptf and zlignptf based on IdCtraPtf
     const ptfs = await zctraptf.findAll({
       where: {
         IdCtraCli: IdCtraCli,
@@ -46,12 +52,11 @@ router.post("/zctraptf", async function (req, res, next) {
   }
 });
 
-// ROUTE PTF PAGE RENDER POST USER ID AND GET PTFS
+// ROUTE ON PAGE PTF : POST PTFs ID AND GET ALL OPE
 router.post("/zope", async function (req, res, next) {
   try {
     const { IdCtraPtfArray } = req.body;
 
-    // Assuming you have a foreign key relationship between zctraptf and zlignptf based on IdCtraPtf
     const ope = await zope.findAll({
       where: {
         IdCtraPtf: IdCtraPtfArray,
@@ -59,6 +64,43 @@ router.post("/zope", async function (req, res, next) {
     });
 
     res.json({ message: "Operations found !", data: ope }); // Send the result as JSON
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ROUTE ON PAGE DETPTF : POST PTF ID AND GET ALL LIGN
+router.post("/zlignptf", async function (req, res, next) {
+  try {
+    console.log(req.body);
+    const { IdCtraPtf } = req.body;
+    console.log("id", IdCtraPtf);
+    const ligns = await zlignptf.findAll({
+      where: {
+        IdCtraPtf: IdCtraPtf,
+      },
+      order: [["LangueNomLocalAlloc_lmt", "ASC"]], // ASC for ascending, DESC for descending
+    });
+    res.json({ message: "Ligns found !", data: ligns }); // Send the result as JSON
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ROUTE ON PAGE DETPTF : POST PTF ID AND GET ALL LIGN
+router.post("/zmvt", async function (req, res, next) {
+  try {
+    const { IdCtraPtf, IdLignPtf } = req.body;
+
+    const ligns = await zmvt.findAll({
+      where: {
+        IdPtf: IdCtraPtf,
+        IdAsset: IdLignPtf,
+      },
+    });
+    res.json({ message: "Ligns found !", data: ligns }); // Send the result as JSON
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

@@ -51,3 +51,39 @@ export const fetchOpe = async (dataToPost) => {
 
   return resData;
 };
+
+// zlignptf TO FIND ALL LIGNS WITH PTF ID
+export const fetchLign = async (dataToPost) => {
+  const response = await fetch("http://localhost:3000/zlignptf", {
+    method: "POST",
+    body: JSON.stringify(dataToPost),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const resData = await response.json();
+  if (!response.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  return resData;
+};
+
+// zlignptf TO FIND ALL LIGNS WITH PTF ID
+export const fetchMvt = async (dataToPost) => {
+  const response = await fetch("http://localhost:3000/zmvt", {
+    method: "POST",
+    body: JSON.stringify(dataToPost),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const resData = await response.json();
+  if (!response.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  return resData;
+};

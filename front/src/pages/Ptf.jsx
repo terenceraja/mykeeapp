@@ -4,9 +4,14 @@ import React from "react";
 import { columnsPtf, columnsOpe, optionsTable } from "../data/TabulatorData";
 import { optionsChart } from "../data/ChartData";
 
+import { useNavigate } from "react-router-dom";
+
 import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
-import { addIdCtraPtfToStore } from "../reducers/primaryKeys";
+import {
+  addIdCtraPtfToStore,
+  addActivePtfToStore,
+} from "../reducers/primaryKeys";
 import { fetchPtf, fetchOpe } from "../utils/http";
 import { useState, useEffect } from "react";
 
@@ -33,6 +38,8 @@ const Ptf = () => {
   const [dataOpe, setdataOpe] = useState([]);
   const [error, setError] = useState("");
   const IdCtraCli = useSelector((state) => state.keys.value.IdCtraCli);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -63,6 +70,12 @@ const Ptf = () => {
 
     fetchDataFromServer(); // Call the renamed local function
   }, []);
+
+  const rowClick = (e, row) => {
+    const activePtf = row.getData();
+    dispatch(addActivePtfToStore(activePtf));
+    navigate("/DetPtf");
+  };
   return (
     <div className={styles.content}>
       <Card title="VOS PORTEFEUILLES">
@@ -70,6 +83,9 @@ const Ptf = () => {
           data={dataPtf}
           columns={columnsPtf}
           options={optionsTable}
+          events={{
+            rowClick: rowClick,
+          }}
         />
       </Card>
       <section className={styles.charts_container}>

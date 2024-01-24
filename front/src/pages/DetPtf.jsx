@@ -3,7 +3,7 @@ import styles from "../styles/pages/DetPtf.module.css";
 import React from "react";
 
 import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
-import { optionsChart } from "../data/ChartData";
+// import { optionsBar } from "../data/ChartData";
 
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ import { fetchLign } from "../utils/http";
 import { useState, useEffect } from "react";
 
 //CHARTJS & TABULATOR
-import { Doughnut } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
 
@@ -67,6 +67,9 @@ const Ptf = () => {
   };
   return (
     <div className={styles.content}>
+      <Card title="bar">
+        <Bar options={optionsBar} data={data} />
+      </Card>
       <Card
         title={`Dépositaires: ${NumeroPtfDep_lmt} Numéro: ${RaisonSociale_lmt} Market Value: ${MktValAaiDevCLIAuc_lcn}`}
       >

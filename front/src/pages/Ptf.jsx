@@ -2,7 +2,7 @@ import styles from "../styles/pages/Ptf.module.css";
 import React from "react";
 
 import { columnsPtf, columnsOpe, optionsTable } from "../data/TabulatorData";
-import { optionsChart } from "../data/ChartData";
+import { optionsPie } from "../data/ChartData";
 
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +26,6 @@ const data = {
   labels: ["a", "b", "c"],
   datasets: [
     {
-      label: "# of Votes",
       data: [12, 19, 3],
     },
   ],
@@ -94,7 +93,7 @@ const Ptf = () => {
             data={data}
             width={300}
             height={300}
-            options={optionsChart}
+            options={optionsPie}
             style={{ backgroundColor: "white", borderRadius: "5px" }}
           />
         </Card>
@@ -104,7 +103,7 @@ const Ptf = () => {
             data={data}
             width={300}
             height={300}
-            options={optionsChart}
+            options={optionsPie}
             style={{ backgroundColor: "white", borderRadius: "5px" }}
           />
         </Card>

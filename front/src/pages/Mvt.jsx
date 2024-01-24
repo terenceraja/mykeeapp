@@ -2,7 +2,6 @@ import styles from "../styles/pages/Mvt.module.css";
 import React from "react";
 
 import { columnsMvt, optionsTable } from "../data/TabulatorData";
-import { optionsChart } from "../data/ChartData";
 
 import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,7 +10,7 @@ import { fetchMvt } from "../utils/http";
 import { useState, useEffect } from "react";
 
 //CHARTJS & TABULATOR
-import { Doughnut } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
 

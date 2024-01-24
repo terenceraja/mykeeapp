@@ -34,13 +34,20 @@ export const fetchPtf = async (dataToPost) => {
   return resData;
 };
 
-// export const fetchGET = async () => {
-//   const response = await fetch("http://localhost:3000/getUsers");
-//   const resData = await response.json();
+// zctraptf TO FIND ALL PTF WITH USER ID
+export const fetchOpe = async (dataToPost) => {
+  const response = await fetch("http://localhost:3000/zope", {
+    method: "POST",
+    body: JSON.stringify(dataToPost),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-//   if (!response.ok) {
-//     throw new Error("Something went wrong");
-//   }
+  const resData = await response.json();
+  if (!response.ok) {
+    throw new Error("Something went wrong");
+  }
 
-//   return resData;
-// };
+  return resData;
+};

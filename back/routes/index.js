@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const { zctracli, zctraptf, zprestation } = require("../models"); // Import your Sequelize model
+const { zctracli, zctraptf, zprestation, zope } = require("../models"); // Import your Sequelize model
 
 // ROUTE CLICK LOGIN GET ID USER
 router.post("/zctracli", async function (req, res, next) {
@@ -40,6 +40,25 @@ router.post("/zctraptf", async function (req, res, next) {
     });
 
     res.json({ message: "Portfolios found !", data: ptfs }); // Send the result as JSON
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ROUTE PTF PAGE RENDER POST USER ID AND GET PTFS
+router.post("/zope", async function (req, res, next) {
+  try {
+    const { IdCtraPtfArray } = req.body;
+
+    // Assuming you have a foreign key relationship between zctraptf and zlignptf based on IdCtraPtf
+    const ope = await zope.findAll({
+      where: {
+        IdCtraPtf: IdCtraPtfArray,
+      },
+    });
+
+    res.json({ message: "Operations found !", data: ope }); // Send the result as JSON
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

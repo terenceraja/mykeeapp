@@ -7,7 +7,7 @@ import { optionsChart } from "../data/ChartData";
 import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { addIdCtraPtfToStore } from "../reducers/primaryKeys";
-import { fetchPtf, fetchId } from "../utils/http";
+import { fetchPtf, fetchOpe } from "../utils/http";
 import { useState, useEffect } from "react";
 
 //CHARTJS & TABULATOR
@@ -26,32 +26,6 @@ const data = {
     },
   ],
 };
-//TABULATOR
-const dataTable = [
-  { id: 1, name: "Oli Bob", age: "12", col: "red", dob: "" },
-  { id: 2, name: "Mary May", age: "1", col: "blue", dob: "14/05/1982" },
-  {
-    id: 3,
-    name: "Christine Lobowski",
-    age: "42",
-    col: "green",
-    dob: "22/05/1982",
-  },
-  {
-    id: 4,
-    name: "Brendon Philips",
-    age: "125",
-    col: "orange",
-    dob: "01/08/1980",
-  },
-  {
-    id: 5,
-    name: "Margret Marmajuke",
-    age: "16",
-    col: "yellow",
-    dob: "31/01/1999",
-  },
-];
 
 const Ptf = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -59,10 +33,9 @@ const Ptf = () => {
   const [dataOpe, setdataOpe] = useState([]);
   const [error, setError] = useState("");
   const IdCtraCli = useSelector((state) => state.keys.value.IdCtraCli);
-  console.log(IdCtraCli);
+
   const dispatch = useDispatch();
 
-  console.log("state", dataPtf);
   // GET FETCHING EXAMPLE
   useEffect(() => {
     const fetchDataFromServer = async () => {
@@ -70,13 +43,16 @@ const Ptf = () => {
 
       try {
         const responsePtf = await fetchPtf({ IdCtraCli });
-        console.log("response data", responsePtf.data);
+        console.log(responsePtf);
         const IdCtraPtfArray = responsePtf.data.map((obj) => {
           return obj.IdCtraPtf;
         });
 
-        console.log("map", IdCtraPtfArray);
+        console.log("Ptf IDs", IdCtraPtfArray);
         dispatch(addIdCtraPtfToStore(IdCtraPtfArray));
+        const responseOpe = await fetchOpe({ IdCtraPtfArray });
+        console.log(responseOpe);
+        setdataOpe(responseOpe.data);
         setdataPtf(responsePtf.data);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
@@ -119,7 +95,7 @@ const Ptf = () => {
       </section>
       <Card title="OPERATIONS">
         <ReactTabulator
-          data={dataTable}
+          data={dataOpe}
           columns={columnsOpe}
           options={optionsTable}
         />

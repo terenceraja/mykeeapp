@@ -77,7 +77,7 @@ const Form = () => {
         name="password"
         required
       />
-      <button>LOGIN</button>
+      <button className={styles.loginBtn}>LOGIN</button>
     </form>
   );
 };

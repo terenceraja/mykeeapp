@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Open Sans"; /*POLICE TEXT PAR DEFAUT*/
 }
 
 /*FULL PAGE CONTAINER*/
@@ -25,7 +26,7 @@ body {
 @media (max-width: 745px) {
   .main {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     width: auto;
     min-height: 100vh; /* Change this to 100vh to ensure full height */
     box-sizing: border-box;
@@ -82,7 +83,7 @@ label {
   font-family: "Exo", "serif";
   font-weight: 700;
   box-sizing: content-box;
-  padding: 4px 8px;
+  padding: 8px;
   border-radius: 4px;
 }
 

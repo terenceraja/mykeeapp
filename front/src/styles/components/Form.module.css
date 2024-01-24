@@ -11,13 +11,18 @@
 input {
   height: 50px;
   width: 100%;
-  padding: 0px;
+  padding-left: 20px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border: 1px;
-  text-align: center;
+  text-align: left;
   border: 0.5px solid rgb(233, 233, 233);
   border-radius: 5px;
   box-sizing: border-box;
+}
+
+input::placeholder {
+  opacity: 0.5;
+  font-size: 15px;
 }
 
 input:focus-visible {
@@ -31,7 +36,7 @@ input:hover {
   transition: border 0.4s ease, box-shadow 0.5s ease;
 }
 
-button {
+.loginBtn {
   height: 50px;
   width: 100%;
   padding: 0px;
@@ -43,7 +48,7 @@ button {
   font-weight: bold;
 }
 
-button:hover {
+.loginBtn:hover {
   background-color: #1b3a48;
   transition: background-color 0.4s ease, box-shadow 0.5s ease;
   cursor: pointer;

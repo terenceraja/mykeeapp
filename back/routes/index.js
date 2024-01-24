@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
 
-const { zctracli, zctraptf } = require("../models"); // Import your Sequelize model
+const { zctracli, zctraptf, zprestation } = require("../models"); // Import your Sequelize model
 
-// ROUTE CLICK LOGIN
+// ROUTE CLICK LOGIN GET ID USER
 router.post("/zctracli", async function (req, res, next) {
   try {
     const { login, password } = req.body;
@@ -27,7 +27,7 @@ router.post("/zctracli", async function (req, res, next) {
   }
 });
 
-// ROUTE CLICK LOGIN
+// ROUTE PTF PAGE RENDER POST USER ID AND GET PTFS
 router.post("/zctraptf", async function (req, res, next) {
   try {
     const { IdCtraCli } = req.body;
@@ -37,19 +37,9 @@ router.post("/zctraptf", async function (req, res, next) {
       where: {
         IdCtraCli: IdCtraCli,
       },
-      include: {
-        model: zlignptf,
-        where: {
-          EtatActiviteLign_lsn: 1,
-        },
-        order: [
-          ["LangueNomLocalAlloc_lmt", "ASC"],
-          ["IdAsset", "ASC"],
-        ],
-      },
     });
 
-    res.json(ptfs); // Send the result as JSON
+    res.json({ message: "Portfolios found !", data: ptfs }); // Send the result as JSON
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

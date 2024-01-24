@@ -11,25 +11,15 @@ const Layout = () => {
     query: "(max-width: 745px)",
   });
 
-  if (isMobile) {
-    return (
-      <main className="main">
-        <div className="outlet">
-          <Outlet />
-        </div>
-        {isMobile ? <NavBarMobile /> : <NavBar />}
-      </main>
-    );
-  } else {
-    return (
-      <main className="main">
-        {isMobile ? <NavBarMobile /> : <NavBar />}
-        <div className="outlet">
-          <Outlet />
-        </div>
-      </main>
-    );
-  }
+  return (
+    <main className="main">
+      {isMobile ? <NavBarMobile /> : <NavBar />}
+      <div className="outlet">
+        <Outlet />
+      </div>
+    </main>
+  );
 };
+// };
 
 export default Layout;

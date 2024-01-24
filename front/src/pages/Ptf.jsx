@@ -1,6 +1,8 @@
 import styles from "../styles/pages/Ptf.module.css";
 import React from "react";
 
+import { columnsPtf, columnsOpe, optionsTable } from "../data/TabulatorData";
+
 import Card from "../components/Card";
 import { useSelector } from "react-redux";
 import { fetchPtf, fetchId } from "../utils/http";
@@ -13,7 +15,7 @@ import { ReactTabulator } from "react-tabulator";
 
 //CUSTOM DATA
 //CHARTJS
-const options = {
+const optionChart = {
   maintainAspectRatio: false, // Don't maintain w/h ratio
 };
 
@@ -26,21 +28,6 @@ const data = {
     },
   ],
 };
-
-// TABULATOR
-const columns = [
-  { title: "Name", field: "name", width: 150 },
-  { title: "Age", field: "age", hozAlign: "left", formatter: "progress" },
-  { title: "Favourite Color", field: "col" },
-  { title: "Date Of Birth", field: "dob", hozAlign: "center" },
-  { title: "Rating", field: "rating", hozAlign: "center", formatter: "star" },
-  {
-    title: "Passed?",
-    field: "passed",
-    hozAlign: "center",
-    formatter: "tickCross",
-  },
-];
 
 const dataTable = [
   { id: 1, name: "Oli Bob", age: "12", col: "red", dob: "" },
@@ -70,11 +57,12 @@ const dataTable = [
 
 const Ptf = () => {
   const [isFetching, setIsFetching] = useState(false);
-  const [resData, setResData] = useState(null);
+  const [dataPtf, setdataPtf] = useState([]);
+  const [dataOpe, setdataOpe] = useState([]);
   const [error, setError] = useState("");
   const IdCtraCli = useSelector((state) => state.keys.value.IdCtraCli);
 
-  console.log(resData);
+  console.log("state", dataPtf);
   // GET FETCHING EXAMPLE
   useEffect(() => {
     const fetchDataFromServer = async () => {
@@ -82,7 +70,9 @@ const Ptf = () => {
 
       try {
         const responsePtf = await fetchPtf({ IdCtraCli });
-        setResData(responsePtf.data);
+        console.log("hey", responsePtf);
+
+        setdataPtf(responsePtf.data);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
       } finally {
@@ -95,20 +85,37 @@ const Ptf = () => {
   return (
     <div className={styles.content}>
       <Card title="VOS PORTEFEUILLES">
-        <ReactTabulator data={dataTable} columns={columns} layout={"fitData"} />
+        <ReactTabulator
+          data={dataPtf}
+          columns={columnsPtf}
+          options={optionsTable}
+        />
       </Card>
       <section className={styles.charts_container}>
         <Card title="CLASSES D'ACTIF">
-          <Doughnut data={data} width={300} height={300} options={options} />
+          <Doughnut
+            data={data}
+            width={300}
+            height={300}
+            options={optionChart}
+          />
         </Card>
 
         <Card title="DEVISES">
-          <Doughnut data={data} width={300} height={300} options={options} />
+          <Doughnut
+            data={data}
+            width={300}
+            height={300}
+            options={optionChart}
+          />
         </Card>
       </section>
       <Card title="OPERATIONS">
-        {" "}
-        <ReactTabulator data={dataTable} columns={columns} layout={"fitData"} />
+        <ReactTabulator
+          data={dataTable}
+          columns={columnsOpe}
+          options={optionsTable}
+        />
       </Card>
     </div>
   );

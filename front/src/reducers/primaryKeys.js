@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: { IdCtraCli: null, IdCrtaPTF: null, IdLigne: null },
+  value: { IdCtraCli: null, IdCrtaPTF: [], IdLigne: null },
 };
 
 export const keysSlice = createSlice({
@@ -13,7 +13,7 @@ export const keysSlice = createSlice({
       state.value.IdCtraCli = action.payload;
     },
     addIdCtraPtfToStore: (state, action) => {
-      state.value.IdCrtaPTF = action.payload;
+      state.value.IdCrtaPTF = [...action.payload];
     },
 
     addIdLigneToStore: (state, action) => {

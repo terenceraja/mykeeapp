@@ -55,7 +55,7 @@ export const columnsPtf = [
 export const columnsOpe = [
   {
     title: "DATE",
-    field: "Date",
+    field: "DateCptaOPE_lsd",
     responsive: 0,
     resizable: false,
     minWidth: 100,
@@ -66,35 +66,35 @@ export const columnsOpe = [
   },
   {
     title: "OPERATION",
-    field: "Operation",
+    field: "NomLocalTypOp_lmt",
     responsive: 0,
     resizable: false,
     minWidth: 200,
   },
   {
     title: "ASSET",
-    field: "Asset",
+    field: "Libelle_lmt",
     responsive: 0,
     resizable: true,
     minWidth: 200,
   },
   {
     title: "ISIN",
-    field: "Isin",
+    field: "CodeIsin_lst",
     responsive: 0,
     resizable: false,
     minWidth: 150,
   },
   {
     title: "DEVISE",
-    field: "Devise",
+    field: "ISOCode_lmt",
     responsive: 1,
     resizable: false,
     minWidth: 80,
   },
   {
     title: "PRIX",
-    field: "Prix",
+    field: "CotOPEASSETDevASSET_lsn",
     responsive: 2,
     headerHozAlign: "right",
     hozAlign: "right",
@@ -109,7 +109,7 @@ export const columnsOpe = [
   },
   {
     title: "QUANTITE",
-    field: "Quantite",
+    field: "CptaMontantQte_lcn",
     responsive: 0,
     headerHozAlign: "right",
     hozAlign: "right",
@@ -125,7 +125,7 @@ export const columnsOpe = [
   },
   {
     title: "MONTANT",
-    field: "Montant",
+    field: "CapitalDevLIGN_lsn",
     responsive: 3,
     formatter: "money",
     formatterParams: {

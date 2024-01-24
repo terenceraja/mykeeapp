@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { fetchId } from "../utils/http";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addIdCtraCliToStore } from "../reducers/primaryKeys";
 
 const Form = () => {
@@ -24,7 +24,6 @@ const Form = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const keys = useSelector((state) => state.keys.value);
 
   // POST FETCHING EXAMPLE
   const fetchDataFromServer = async () => {

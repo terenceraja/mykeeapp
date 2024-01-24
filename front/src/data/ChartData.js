@@ -1,7 +1,4 @@
-import React from "react";
-
-const ChartData = () => {
-  return <div>ChartData</div>;
+//FOR ALL
+export const optionsChart = {
+  maintainAspectRatio: false, // Don't maintain w/h ratio
 };
-
-export default ChartData;

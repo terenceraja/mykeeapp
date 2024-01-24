@@ -2,9 +2,11 @@ import styles from "../styles/pages/Ptf.module.css";
 import React from "react";
 
 import { columnsPtf, columnsOpe, optionsTable } from "../data/TabulatorData";
+import { optionsChart } from "../data/ChartData";
 
 import Card from "../components/Card";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addIdCtraPtfToStore } from "../reducers/primaryKeys";
 import { fetchPtf, fetchId } from "../utils/http";
 import { useState, useEffect } from "react";
 
@@ -15,10 +17,6 @@ import { ReactTabulator } from "react-tabulator";
 
 //CUSTOM DATA
 //CHARTJS
-const optionChart = {
-  maintainAspectRatio: false, // Don't maintain w/h ratio
-};
-
 const data = {
   labels: ["a", "b", "c"],
   datasets: [
@@ -28,7 +26,7 @@ const data = {
     },
   ],
 };
-
+//TABULATOR
 const dataTable = [
   { id: 1, name: "Oli Bob", age: "12", col: "red", dob: "" },
   { id: 2, name: "Mary May", age: "1", col: "blue", dob: "14/05/1982" },
@@ -61,6 +59,8 @@ const Ptf = () => {
   const [dataOpe, setdataOpe] = useState([]);
   const [error, setError] = useState("");
   const IdCtraCli = useSelector((state) => state.keys.value.IdCtraCli);
+  console.log(IdCtraCli);
+  const dispatch = useDispatch();
 
   console.log("state", dataPtf);
   // GET FETCHING EXAMPLE
@@ -70,8 +70,13 @@ const Ptf = () => {
 
       try {
         const responsePtf = await fetchPtf({ IdCtraCli });
-        console.log("hey", responsePtf);
+        console.log("response data", responsePtf.data);
+        const IdCtraPtfArray = responsePtf.data.map((obj) => {
+          return obj.IdCtraPtf;
+        });
 
+        console.log("map", IdCtraPtfArray);
+        dispatch(addIdCtraPtfToStore(IdCtraPtfArray));
         setdataPtf(responsePtf.data);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
@@ -97,7 +102,8 @@ const Ptf = () => {
             data={data}
             width={300}
             height={300}
-            options={optionChart}
+            options={optionsChart}
+            style={{ backgroundColor: "white", borderRadius: "5px" }}
           />
         </Card>
 
@@ -106,7 +112,8 @@ const Ptf = () => {
             data={data}
             width={300}
             height={300}
-            options={optionChart}
+            options={optionsChart}
+            style={{ backgroundColor: "white", borderRadius: "5px" }}
           />
         </Card>
       </section>

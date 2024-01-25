@@ -1,6 +1,8 @@
 import styles from "../styles/pages/Ptf.module.css";
 import React from "react";
 
+import { formatISO } from "../utils/functions";
+
 import { columnsPtf, columnsOpe, optionsTable } from "../data/TabulatorData";
 import { optionsPie } from "../data/ChartData";
 
@@ -22,10 +24,11 @@ import { ReactTabulator } from "react-tabulator";
 
 //CUSTOM DATA
 //CHARTJS
-const data = {
+const dataPie = {
   labels: ["a", "b", "c"],
   datasets: [
     {
+      label: "# of Votes",
       data: [12, 19, 3],
     },
   ],
@@ -58,7 +61,9 @@ const Ptf = () => {
         dispatch(addIdCtraPtfToStore(IdCtraPtfArray));
         const responseOpe = await fetchOpe({ IdCtraPtfArray });
         console.log(responseOpe);
-        setdataOpe(responseOpe.data);
+        const updateDataOpe = formatISO(responseOpe.data, "DateCptaOPE_lsd");
+
+        setdataOpe(updateDataOpe);
         setdataPtf(responsePtf.data);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
@@ -90,7 +95,7 @@ const Ptf = () => {
       <section className={styles.charts_container}>
         <Card title="CLASSES D'ACTIF">
           <Doughnut
-            data={data}
+            data={dataPie}
             width={300}
             height={300}
             options={optionsPie}
@@ -100,7 +105,7 @@ const Ptf = () => {
 
         <Card title="DEVISES">
           <Doughnut
-            data={data}
+            data={dataPie}
             width={300}
             height={300}
             options={optionsPie}

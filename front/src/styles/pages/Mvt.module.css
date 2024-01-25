@@ -1,1 +1,7 @@
-
+.content {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  gap: 12px;
+}

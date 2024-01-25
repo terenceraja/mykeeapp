@@ -24,7 +24,7 @@ router.post("/zctracli", async function (req, res, next) {
 
     console.log(user);
     if (!user) {
-      res.json({ message: "User not found !" });
+      res.json({ message: "User not found !", data: user });
     } else {
       res.json({ message: "User found !", IdCtraCli: user.IdCtraCli });
     }
@@ -92,15 +92,18 @@ router.post("/zlignptf", async function (req, res, next) {
 // ROUTE ON PAGE DETPTF : POST PTF ID AND GET ALL LIGN
 router.post("/zmvt", async function (req, res, next) {
   try {
-    const { IdCtraPtf, IdLignPtf } = req.body;
+    const { IdCtraPtf, IdAsset } = req.body;
+    console.log(req.body);
 
-    const ligns = await zmvt.findAll({
+    const mvt = await zmvt.findAll({
       where: {
         IdPtf: IdCtraPtf,
-        IdAsset: IdLignPtf,
+        idAsset: IdAsset,
       },
+      // order: [["CptaDateOPE_lsd", "ASC"]], // ASC for ascending, DESC for descending
     });
-    res.json({ message: "Ligns found !", data: ligns }); // Send the result as JSON
+
+    res.json({ message: "Mvt found !", data: mvt }); // Send the result as JSON
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

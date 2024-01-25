@@ -3,9 +3,11 @@ import styles from "../styles/pages/DetPtf.module.css";
 import React from "react";
 
 import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
-// import { optionsBar } from "../data/ChartData";
+import { optionsBar } from "../data/ChartData";
 
 import { useNavigate } from "react-router-dom";
+
+import { formatISO } from "../utils/functions";
 
 import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
@@ -46,7 +48,12 @@ const Ptf = () => {
         const responseLignPtf = await fetchLign({ IdCtraPtf });
         console.log(responseLignPtf);
 
-        setDataLignPtf(responseLignPtf.data);
+        const updateDataLignPtf = formatISO(
+          responseLignPtf.data,
+          "DateMaturite_lsd"
+        );
+        console.log("invalid", updateDataLignPtf);
+        setDataLignPtf(updateDataLignPtf);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
       } finally {
@@ -60,16 +67,13 @@ const Ptf = () => {
 
   const rowClick = (e, row) => {
     console.log(row.getData());
-    const IdLignPtf = row.getData().IdLignPtf;
-    const activeLign = { IdCtraPtf: IdCtraPtf, IdLignPtf: IdLignPtf };
+    const IdAsset = row.getData().IdAsset;
+    const activeLign = { IdCtraPtf: IdCtraPtf, IdAsset: IdAsset };
     dispatch(addActiveLignToStore(activeLign));
     navigate("/Mvt");
   };
   return (
     <div className={styles.content}>
-      <Card title="bar">
-        <Bar options={optionsBar} data={data} />
-      </Card>
       <Card
         title={`Dépositaires: ${NumeroPtfDep_lmt} Numéro: ${RaisonSociale_lmt} Market Value: ${MktValAaiDevCLIAuc_lcn}`}
       >

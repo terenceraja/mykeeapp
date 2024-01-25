@@ -42,7 +42,6 @@ export const columnsPtf = [
     formatterParams: {
       decimal: ",",
       thousand: " ",
-      negativeSign: true,
     },
     resizable: true,
     headerHozAlign: "right",
@@ -60,9 +59,6 @@ export const columnsOpe = [
     resizable: false,
     minWidth: 100,
     sorter: "date",
-    sorterParams: {
-      format: "dd/mm/yyyy",
-    },
   },
   {
     title: "OPERATION",
@@ -102,7 +98,6 @@ export const columnsOpe = [
     formatterParams: {
       decimal: ",",
       thousand: " ",
-      negativeSign: true,
     },
     resizable: false,
     minWidth: 120,
@@ -117,7 +112,6 @@ export const columnsOpe = [
     formatterParams: {
       decimal: ",",
       thousand: " ",
-      negativeSign: true,
       precision: 4,
     },
     resizable: false,
@@ -131,7 +125,6 @@ export const columnsOpe = [
     formatterParams: {
       decimal: ",",
       thousand: " ",
-      negativeSign: true,
     },
     resizable: false,
     minWidth: 120,
@@ -237,6 +230,7 @@ export const columnsLignPtf = [
     responsive: 10,
     field: "DateMaturite_lsd",
     minWidth: 100,
+    sorter: "date",
   },
   {
     title: "YIELD",
@@ -329,17 +323,12 @@ export const columnsMvt = [
     title: "OPERATION",
     field: "CptaDateOPE_lsd",
     sorter: "date",
-    sorterParams: {
-      format: "dd/mm/yyyy",
-    },
   },
+
   {
     title: "VALEUR",
     field: "CptaDateValeur_lsd",
     sorter: "date",
-    sorterParams: {
-      format: "dd/mm/yyyy",
-    },
   },
   { title: "LIBELLE DU MOUVEMENT", field: "Libelle_lst" },
   { title: "E", field: "" },

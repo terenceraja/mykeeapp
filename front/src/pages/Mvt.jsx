@@ -1,6 +1,9 @@
 import styles from "../styles/pages/Mvt.module.css";
 import React from "react";
 
+import { formatISO } from "../utils/functions";
+import { DateTime } from "luxon";
+
 import { columnsMvt, optionsTable } from "../data/TabulatorData";
 
 import Card from "../components/Card";
@@ -30,9 +33,15 @@ const Mvt = () => {
 
       try {
         const responseMvt = await fetchMvt(lignInfos);
-        console.log(responseMvt);
+        console.log("response", responseMvt);
 
-        setDataMvt(responseMvt.data);
+        const updateData = formatISO(
+          responseMvt.data,
+          "CptaDateOPE_lsd",
+          "CptaDateValeur_lsd"
+        );
+        console.log("update", updateData);
+        setDataMvt(updateData);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
       } finally {

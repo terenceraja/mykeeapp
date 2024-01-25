@@ -56,7 +56,7 @@ const Form = () => {
       dispatch(addIdCtraCliToStore(response.IdCtraCli));
       navigate("/ptf");
     } else {
-      console.log(response.message);
+      console.log(response);
     }
   };
 
@@ -68,6 +68,7 @@ const Form = () => {
         placeholder="Login"
         name="login"
         required
+        autoComplete="current-username"
       />
       <input
         onChange={(e) => handleOnChange(e)}
@@ -75,6 +76,7 @@ const Form = () => {
         placeholder="Password"
         name="password"
         required
+        autoComplete="current-password"
       />
       <button className={styles.loginBtn}>LOGIN</button>
     </form>

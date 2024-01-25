@@ -3,11 +3,11 @@ import styles from "../styles/pages/DetPtf.module.css";
 import React from "react";
 
 import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
-import { optionsBar } from "../data/ChartData";
+import { labels, optionsBar } from "../data/ChartData";
 
 import { useNavigate } from "react-router-dom";
 
-import { formatISO } from "../utils/functions";
+import { formatISO, PCTValCalc, PCTCalc } from "../utils/functions";
 
 import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,12 +20,28 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
 
+//DUMMY DATA BAR
+
+const dummyData = {
+  labels,
+  datasets: [
+    {
+      data: [10, 25, 39, 78],
+      backgroundColor: "rgba(75, 192, 192, 0.2)",
+      borderColor: "rgba(75, 192, 192, 1)",
+      borderWidth: 1,
+      label: "My Dataset",
+    },
+  ],
+};
+
 const Ptf = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [dataLignPtf, setDataLignPtf] = useState([]);
   const [error, setError] = useState("");
 
   const ptfInfos = useSelector((state) => state.keys.value.activePtf);
+  console.log("totMV", ptfInfos.MktValAaiDevCLIAuc_lcn);
 
   console.log("ptfInfos", ptfInfos);
   const {
@@ -47,13 +63,21 @@ const Ptf = () => {
       try {
         const responseLignPtf = await fetchLign({ IdCtraPtf });
         console.log(responseLignPtf);
+        //CALCULATE +/- VALUE
+        const dataWithPCTVal = PCTValCalc(responseLignPtf.data);
+        console.log("new", dataWithPCTVal);
+        //
 
-        const updateDataLignPtf = formatISO(
-          responseLignPtf.data,
-          "DateMaturite_lsd"
-        );
-        console.log("invalid", updateDataLignPtf);
-        setDataLignPtf(updateDataLignPtf);
+        //CALCULATE %
+        const dataWithPCT = PCTCalc(dataWithPCTVal, MktValAaiDevCLIAuc_lcn);
+        console.log("new", dataWithPCTVal);
+        //
+
+        //DATE FORMAT
+        const dataDateFormat = formatISO(dataWithPCT, "DateMaturite_lsd");
+        console.log("Final", dataDateFormat);
+        ///
+        setDataLignPtf(dataDateFormat);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
       } finally {
@@ -74,6 +98,14 @@ const Ptf = () => {
   };
   return (
     <div className={styles.content}>
+      <Card title="bar">
+        <Bar
+          options={optionsBar}
+          data={dummyData}
+          height={300}
+          style={{ backgroundColor: "white", borderRadius: "5px" }}
+        />
+      </Card>
       <Card
         title={`Dépositaires: ${NumeroPtfDep_lmt} Numéro: ${RaisonSociale_lmt} Market Value: ${MktValAaiDevCLIAuc_lcn}`}
       >

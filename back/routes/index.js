@@ -1,14 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const {
-  zctracli,
-  zctraptf,
-  zprestation,
-  zope,
-  zlignptf,
-  zmvt,
-} = require("../models"); // Import your Sequelize model
+const { zctracli, zctraptf, zope, zlignptf, zmvt } = require("../models"); // Import your Sequelize model
 
 // ROUTE CLICK LOGIN GET ID USER
 router.post("/zctracli", async function (req, res, next) {
@@ -64,6 +57,25 @@ router.post("/zope", async function (req, res, next) {
     });
 
     res.json({ message: "Operations found !", data: ope }); // Send the result as JSON
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ROUTE ON PAGE DETPTF : POST PTF ID AND GET ALL LIGN
+router.post("/zlignptf", async function (req, res, next) {
+  try {
+    console.log(req.body);
+    const { IdCtraPtf } = req.body;
+    console.log("id", IdCtraPtf);
+    const ligns = await zlignptf.findAll({
+      where: {
+        IdCtraPtf: IdCtraPtf,
+      },
+      order: [["LangueNomLocalAlloc_lmt", "ASC"]], // ASC for ascending, DESC for descending
+    });
+    res.json({ message: "Ligns found !", data: ligns }); // Send the result as JSON
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

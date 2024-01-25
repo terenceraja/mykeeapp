@@ -262,7 +262,7 @@ export const columnsLignPtf = [
   },
   {
     title: "%",
-    field: "Pourcentage",
+    field: "PCT",
     responsive: 12,
     minWidth: 100,
     headerHozAlign: "right",

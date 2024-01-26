@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+
   box-sizing: border-box;
   font-family: "Open Sans"; /*POLICE TEXT PAR DEFAUT*/
 }
@@ -16,14 +17,14 @@ body {
 /*FULL CONTENT CONTAINER*/
 .outlet {
   display: flex;
-  width: 100%;
+  min-width: calc(100% - 150px);
   min-height: 100vh;
   background-color: #f2f4f3;
   padding: 12px;
   box-sizing: border-box;
 }
 
-@media (max-width: 745px) {
+@media (max-width: 1025px) {
   .main {
     display: flex;
     flex-direction: column-reverse;
@@ -94,6 +95,10 @@ canvas {
 }
 
 /*TABULATOR*/
+
+.tableContainer {
+  width: 100%;
+}
 
 /*Style couleur background derière les headers des colonnes*/
 .tabulator .tabulator-header {

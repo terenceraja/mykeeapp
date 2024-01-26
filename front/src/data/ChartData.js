@@ -4,17 +4,24 @@ export const optionsPie = {
   plugins: {
     legend: {
       display: true,
+      position: "bottom", // Position the legend at the bottom
     },
     datalabels: {
       formatter: (val) => {
         return `${Math.ceil(val * 100) / 100}` + " %";
       },
-      anchor: "center", // Adjust the anchor point for the data labels
-      align: "center",
+      anchor: "end", // Adjust the anchor point for the data labels
+      align: "end",
 
       font: {
         size: 9,
       },
+    },
+  },
+  layout: {
+    padding: {
+      top: 10,
+      bottom: 20,
     },
   },
 };

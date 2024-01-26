@@ -9,8 +9,7 @@
 
 .content_container {
   position: relative;
-  /* background-color: white; */
-  width: 100%;
+  width: auto;
   height: auto;
   border-radius: 4px;
 }

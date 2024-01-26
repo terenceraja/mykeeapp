@@ -46,10 +46,20 @@ const Ptf = () => {
     labels: dataClasses.uniqueLangues,
     datasets: [
       {
-        label: "# of Votes",
+        label: "CLASSES",
         data: dataClasses.adjustedSumByLangue,
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.4)",
+          "rgba(65, 105, 225, 0.4)",
+          "rgba(255, 192, 203, 0.4)",
+          "rgba(255, 165, 0, 0.4)",
+        ],
+        borderColor: [
+          "rgba(75, 192, 192, 0.8)",
+          "rgba(65, 105, 225, 0.8)",
+          "rgba(255, 192, 203, 0.8)",
+          "rgba(255, 165, 0, 0.8)",
+        ],
       },
     ],
   };
@@ -58,10 +68,20 @@ const Ptf = () => {
     labels: dataDevises.uniqueLangues,
     datasets: [
       {
-        label: "# of Votes",
+        label: "DEVISES",
         data: dataDevises.adjustedSumByLangue,
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.4)",
+          "rgba(65, 105, 225, 0.4)",
+          "rgba(255, 192, 203, 0.4)",
+          "rgba(255, 165, 0, 0.4)",
+        ],
+        borderColor: [
+          "rgba(75, 192, 192, 0.8)",
+          "rgba(65, 105, 225, 0.8)",
+          "rgba(255, 192, 203, 0.8)",
+          "rgba(255, 165, 0, 0.8)",
+        ],
       },
     ],
   };

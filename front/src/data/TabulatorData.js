@@ -304,7 +304,7 @@ export const columnsLignPtf = [
   {
     title: "CCEUR",
     field: "CpnCourusTotDevPTF_lsn",
-    responsive: 15,
+    responsive: 16,
     minWidth: 100,
     headerHozAlign: "right",
     hozAlign: "right",

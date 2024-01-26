@@ -8,7 +8,7 @@ import "../styles/index.css";
 
 const Layout = () => {
   const isMobile = useMediaQuery({
-    query: "(max-width: 745px)",
+    query: "(max-width: 1025px)",
   });
 
   return (

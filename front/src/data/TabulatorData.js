@@ -331,7 +331,7 @@ export const columnsMvt = [
     sorter: "date",
   },
   { title: "LIBELLE DU MOUVEMENT", field: "Libelle_lst" },
-  { title: "E", field: "" },
+  { title: "E", field: "FlagExtourne_lcn" },
   {
     title: "PRIX",
     field: "CotOPEASSETDevASSET_lsn",

@@ -70,24 +70,6 @@ export const fetchLign = async (dataToPost) => {
   return resData;
 };
 
-// zlignptf TO FIND ALL LIGNS WITH ALL PTFs ID
-export const fetchLignCons = async (dataToPost) => {
-  const response = await fetch("http://localhost:3000/zlignptf", {
-    method: "POST",
-    body: JSON.stringify(dataToPost),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const resData = await response.json();
-  if (!response.ok) {
-    throw new Error("Something went wrong");
-  }
-
-  return resData;
-};
-
 // zmvt TO FIND ALL MVT WITH ASSET ID
 export const fetchMvt = async (dataToPost) => {
   const response = await fetch("http://localhost:3000/zmvt", {

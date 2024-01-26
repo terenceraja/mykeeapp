@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   addIdCtraPtfToStore,
   addActivePtfToStore,
+  addTotalMVToStore,
 } from "../reducers/primaryKeys";
 import { fetchPtf, fetchOpe } from "../utils/http";
 import { useState, useEffect } from "react";
@@ -59,6 +60,9 @@ const Ptf = () => {
 
         console.log("Ptf IDs", IdCtraPtfArray);
         dispatch(addIdCtraPtfToStore(IdCtraPtfArray));
+
+        dispatch(addTotalMVToStore(responsePtf.totMV));
+
         const responseOpe = await fetchOpe({ IdCtraPtfArray });
         console.log(responseOpe);
         const updateDataOpe = formatISO(responseOpe.data, "DateCptaOPE_lsd");

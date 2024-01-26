@@ -1,13 +1,19 @@
-import styles from "../styles/pages/Cons.module.css";
+import styles from "../styles/pages/DetPtf.module.css";
 
 import React from "react";
 
 import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
-import { labels, optionsBar } from "../data/ChartData";
+
+import { optionsBar } from "../data/ChartData";
 
 import { useNavigate } from "react-router-dom";
 
-import { formatISO, PCTValCalc, PCTCalc } from "../utils/functions";
+import {
+  formatISO,
+  PCTValCalc,
+  PCTCalc,
+  getUniqueLanguesWithSum,
+} from "../utils/functions";
 
 import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,37 +26,32 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
 
-//DUMMY DATA BAR
-
-const dummyData = {
-  labels,
-  datasets: [
-    {
-      data: [10, 25, 39, 78],
-      backgroundColor: "rgba(75, 192, 192, 0.2)",
-      borderColor: "rgba(75, 192, 192, 1)",
-      borderWidth: 1,
-      label: "My Dataset",
-    },
-  ],
-};
-
 const Cons = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [dataLignPtf, setDataLignPtf] = useState([]);
+  const [dataBar, setDataBar] = useState({});
   const [error, setError] = useState("");
 
-  const ptfInfos = useSelector((state) => state.keys.value.activePtf);
-  console.log("totMV", ptfInfos.MktValAaiDevCLIAuc_lcn);
+  const dataBarChart = {
+    labels: dataBar.uniqueLangues,
+    datasets: [
+      {
+        data: dataBar.adjustedSumByLangue,
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+        label: "My Dataset",
+        barThickness: 50,
+      },
+    ],
+  };
 
-  console.log("ptfInfos", ptfInfos);
-  const {
-    IdCtraPtf,
-    NumeroPtfDep_lmt,
-    RaisonSociale_lmt,
-    MktValAaiDevCLIAuc_lcn,
-  } = ptfInfos;
-  console.log("id", IdCtraPtf);
+  const IdCtraPtf = useSelector((state) => state.keys.value.IdCrtaPTF);
+  const totalMV = useSelector((state) => state.keys.value.TotalMV);
+
+  console.log("IdCtraPtfArray", IdCtraPtf);
+  console.log(totalMV);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -61,22 +62,28 @@ const Cons = () => {
       setIsFetching(true);
 
       try {
-        const responseLignPtf = await fetchLignCons({ IdCtraPtf });
+        const responseLignPtf = await fetchLign({ IdCtraPtf });
         console.log(responseLignPtf);
         //CALCULATE +/- VALUE
         const dataWithPCTVal = PCTValCalc(responseLignPtf.data);
-        console.log("new", dataWithPCTVal);
+        console.log("PCTVAL", dataWithPCTVal);
         //
 
         //CALCULATE %
-        const dataWithPCT = PCTCalc(dataWithPCTVal, MktValAaiDevCLIAuc_lcn);
-        console.log("new", dataWithPCTVal);
+        const dataWithPCT = PCTCalc(dataWithPCTVal, totalMV);
+        console.log("%", dataWithPCTVal);
         //
 
         //DATE FORMAT
         const dataDateFormat = formatISO(dataWithPCT, "DateMaturite_lsd");
         console.log("Final", dataDateFormat);
         ///
+
+        //GET LABELS
+        const labels = getUniqueLanguesWithSum(dataDateFormat, totalMV);
+        setDataBar(labels);
+        //
+
         setDataLignPtf(dataDateFormat);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
@@ -98,15 +105,15 @@ const Cons = () => {
   };
   return (
     <div className={styles.content}>
-      <Card title="bar">
+      <Card title="CLASSES D'ACTIF">
         <Bar
           options={optionsBar}
-          data={dummyData}
+          data={dataBarChart}
           height={300}
           style={{ backgroundColor: "white", borderRadius: "5px" }}
         />
       </Card>
-      <Card title="Consolidation">
+      <Card title="Consolidations">
         <ReactTabulator
           data={dataLignPtf}
           columns={columnsLignPtf}

@@ -3,11 +3,15 @@ import styles from "../styles/pages/DetPtf.module.css";
 import React from "react";
 
 import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
-import { labels, optionsBar } from "../data/ChartData";
-
+import { optionsBar } from "../data/ChartData";
 import { useNavigate } from "react-router-dom";
 
-import { formatISO, PCTValCalc, PCTCalc } from "../utils/functions";
+import {
+  formatISO,
+  PCTValCalc,
+  PCTCalc,
+  getUniqueLanguesWithSum,
+} from "../utils/functions";
 
 import Card from "../components/Card";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,23 +26,25 @@ import { ReactTabulator } from "react-tabulator";
 
 //DUMMY DATA BAR
 
-const dummyData = {
-  labels,
-  datasets: [
-    {
-      data: [10, 25, 39, 78],
-      backgroundColor: "rgba(75, 192, 192, 0.2)",
-      borderColor: "rgba(75, 192, 192, 1)",
-      borderWidth: 1,
-      label: "My Dataset",
-    },
-  ],
-};
-
 const Ptf = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [dataLignPtf, setDataLignPtf] = useState([]);
+  const [dataBar, setDataBar] = useState({});
   const [error, setError] = useState("");
+
+  const dataBarChart = {
+    labels: dataBar.uniqueLangues,
+    datasets: [
+      {
+        data: dataBar.adjustedSumByLangue,
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+        label: "My Dataset",
+        barThickness: 50,
+      },
+    ],
+  };
 
   const ptfInfos = useSelector((state) => state.keys.value.activePtf);
   console.log("totMV", ptfInfos.MktValAaiDevCLIAuc_lcn);
@@ -76,7 +82,16 @@ const Ptf = () => {
         //DATE FORMAT
         const dataDateFormat = formatISO(dataWithPCT, "DateMaturite_lsd");
         console.log("Final", dataDateFormat);
-        ///
+        //
+
+        //GET LABELS
+        const labels = getUniqueLanguesWithSum(
+          dataDateFormat,
+          MktValAaiDevCLIAuc_lcn
+        );
+        setDataBar(labels);
+        //
+
         setDataLignPtf(dataDateFormat);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
@@ -98,10 +113,10 @@ const Ptf = () => {
   };
   return (
     <div className={styles.content}>
-      <Card title="bar">
+      <Card title="CLASSES D'ACTIF">
         <Bar
           options={optionsBar}
-          data={dummyData}
+          data={dataBarChart}
           height={300}
           style={{ backgroundColor: "white", borderRadius: "5px" }}
         />

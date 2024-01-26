@@ -54,3 +54,34 @@ export const PCTCalc = (arr, totMV) =>
       PCT: isNaN(PCT) ? null : PCT,
     };
   });
+
+export function getUniqueLanguesWithSum(arrayOfObjects, mvPtf) {
+  console.log("MV", mvPtf);
+  if (typeof mvPtf === "string") {
+    mvPtf = parseFloat(mvPtf);
+  }
+  let uniqueLangues = [];
+  let adjustedSumByLangueArray = [];
+
+  arrayOfObjects.forEach((obj) => {
+    if (obj.LangueNomLocalAlloc_lmt) {
+      const langue = obj.LangueNomLocalAlloc_lmt;
+
+      // Check if the language is not already in the uniqueLangues array
+      if (!uniqueLangues.includes(langue)) {
+        uniqueLangues.push(langue);
+        adjustedSumByLangueArray.push(
+          (parseFloat(obj.MVAaiJCptaDevCLI_lsn) / mvPtf) * 100
+        );
+      } else {
+        // Update the adjusted sum for the current language
+        const index = uniqueLangues.findIndex((item) => item === langue);
+        adjustedSumByLangueArray[index] +=
+          (parseFloat(obj.MVAaiJCptaDevCLI_lsn) / mvPtf) * 100;
+      }
+    }
+  });
+
+  // Return an object with uniqueLangues array and adjustedSumByLangue array
+  return { uniqueLangues, adjustedSumByLangue: adjustedSumByLangueArray };
+}

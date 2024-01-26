@@ -38,7 +38,13 @@ router.post("/zctraptf", async function (req, res, next) {
       },
     });
 
-    res.json({ message: "Portfolios found !", data: ptfs }); // Send the result as JSON
+    // Assuming ptfs is an array of objects
+    const totMV = ptfs.reduce(
+      (acc, obj) => acc + parseFloat(obj.MktValAaiDevCLIAuc_lcn),
+      0
+    );
+
+    res.json({ message: "Portfolios found !", data: ptfs, totMV: totMV }); // Send the result as JSON
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -83,25 +89,6 @@ router.post("/zlignptf", async function (req, res, next) {
 });
 
 // ROUTE ON PAGE DETPTF : POST PTF ID AND GET ALL LIGN
-router.post("/zlignptf", async function (req, res, next) {
-  try {
-    console.log(req.body);
-    const { IdCtraPtf } = req.body;
-    console.log("id", IdCtraPtf);
-    const ligns = await zlignptf.findAll({
-      where: {
-        IdCtraPtf: IdCtraPtf,
-      },
-      order: [["LangueNomLocalAlloc_lmt", "ASC"]], // ASC for ascending, DESC for descending
-    });
-    res.json({ message: "Ligns found !", data: ligns }); // Send the result as JSON
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-// ROUTE ON PAGE DETPTF : POST PTF ID AND GET ALL LIGN
 router.post("/zmvt", async function (req, res, next) {
   try {
     const { IdCtraPtf, IdAsset } = req.body;
@@ -112,7 +99,7 @@ router.post("/zmvt", async function (req, res, next) {
         IdPtf: IdCtraPtf,
         idAsset: IdAsset,
       },
-      // order: [["CptaDateOPE_lsd", "ASC"]], // ASC for ascending, DESC for descending
+      order: [["CptaDateOPE_lsd", "DESC"]], // ASC for ascending, DESC for descending
     });
 
     res.json({ message: "Mvt found !", data: mvt }); // Send the result as JSON

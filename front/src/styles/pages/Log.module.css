@@ -23,6 +23,16 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 1025px) {
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+    width: 100%;
+  }
+}
+
 .test {
   height: 100%;
 }

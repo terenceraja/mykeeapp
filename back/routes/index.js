@@ -54,11 +54,11 @@ router.post("/zctraptf", async function (req, res, next) {
 // ROUTE ON PAGE PTF : POST PTFs ID AND GET ALL OPE
 router.post("/zope", async function (req, res, next) {
   try {
-    const { IdCtraPtfArray } = req.body;
+    const { IdCtraPtf } = req.body;
 
     const ope = await zope.findAll({
       where: {
-        IdCtraPtf: IdCtraPtfArray,
+        IdCtraPtf: IdCtraPtf,
       },
     });
 

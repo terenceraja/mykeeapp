@@ -1,13 +1,11 @@
 import styles from "../styles/pages/DetPtf.module.css";
-
 import React from "react";
-
-import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
-
-import { optionsBar } from "../data/ChartData";
-
 import { useNavigate } from "react-router-dom";
+import Card from "../components/Card";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
+//UTILS FUNCTIONS
 import {
   formatISO,
   PCTValCalc,
@@ -15,15 +13,16 @@ import {
   getUniqueLanguesWithSum,
 } from "../utils/functions";
 
-import Card from "../components/Card";
-import { useSelector, useDispatch } from "react-redux";
+// REDUCERS
 import { addActiveLignToStore } from "../reducers/primaryKeys";
+
+//HTTP REQUESTS
 import { fetchLign } from "../utils/http";
-import { useState, useEffect } from "react";
 
 //CHARTJS & TABULATOR
+import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
+import { optionsBar } from "../data/ChartData";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
 
 const Cons = () => {
@@ -32,6 +31,15 @@ const Cons = () => {
   const [dataBar, setDataBar] = useState({});
   const [error, setError] = useState("");
 
+  //STORE
+  const dispatch = useDispatch();
+  const IdCtraPtf = useSelector((state) => state.keys.value.IdCrtaPTF);
+  const totalMV = useSelector((state) => state.keys.value.TotalMV);
+
+  // NAVIGATE
+  const navigate = useNavigate();
+
+  // BAR CHARTJS DATASETS
   const dataBarChart = {
     labels: dataBar.uniqueLangues,
     datasets: [
@@ -46,15 +54,8 @@ const Cons = () => {
     ],
   };
 
-  const IdCtraPtf = useSelector((state) => state.keys.value.IdCrtaPTF);
-  const totalMV = useSelector((state) => state.keys.value.TotalMV);
-
   console.log("IdCtraPtfArray", IdCtraPtf);
   console.log(totalMV);
-
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
 
   // GET FETCHING EXAMPLE
   useEffect(() => {
@@ -96,6 +97,7 @@ const Cons = () => {
   }, []);
   //
 
+  //TABULATOR ROW CLICK
   const rowClick = (e, row) => {
     console.log(row.getData());
     const IdAsset = row.getData().IdAsset;

@@ -7,13 +7,13 @@ export const optionsPie = {
     },
     datalabels: {
       formatter: (val) => {
-        return val + " %";
+        return `${Math.ceil(val * 100) / 100}` + " %";
       },
       anchor: "center", // Adjust the anchor point for the data labels
       align: "center",
-      color: "black",
+
       font: {
-        size: 12,
+        size: 9,
       },
     },
   },
@@ -41,7 +41,7 @@ export const optionsBar = {
     },
     datalabels: {
       formatter: (val) => {
-        return val + " %";
+        return `${Math.ceil(val * 100) / 100}` + " %";
       },
       anchor: "center", // Adjust the anchor point for the data labels
       align: "center",

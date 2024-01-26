@@ -1,20 +1,19 @@
 import styles from "../styles/pages/Mvt.module.css";
 import React from "react";
-
-import { formatISO } from "../utils/functions";
-import { DateTime } from "luxon";
-
-import { columnsMvt, optionsTable } from "../data/TabulatorData";
-
 import Card from "../components/Card";
-import { useSelector, useDispatch } from "react-redux";
-
-import { fetchMvt } from "../utils/http";
 import { useState, useEffect } from "react";
 
+// UTILS FUNCTIONS
+import { formatISO } from "../utils/functions";
+
+// REDUCER
+import { useSelector } from "react-redux";
+
+//HTTP REQUESTS
+import { fetchMvt } from "../utils/http";
+
 //CHARTJS & TABULATOR
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
+import { columnsMvt, optionsTable } from "../data/TabulatorData";
 import { ReactTabulator } from "react-tabulator";
 
 const Mvt = () => {
@@ -22,6 +21,7 @@ const Mvt = () => {
   const [dataMvt, setDataMvt] = useState([]);
   const [error, setError] = useState("");
 
+  // STORE
   const lignInfos = useSelector((state) => state.keys.value.activeLign);
 
   console.log("lignInfos", lignInfos);

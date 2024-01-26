@@ -1,50 +1,70 @@
 import styles from "../styles/pages/Ptf.module.css";
 import React from "react";
-
-import { formatISO } from "../utils/functions";
-
-import { columnsPtf, columnsOpe, optionsTable } from "../data/TabulatorData";
-import { optionsPie } from "../data/ChartData";
-
-import { useNavigate } from "react-router-dom";
-
 import Card from "../components/Card";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+// UTILS FUNCTIONS
+import {
+  formatISO,
+  getUniqueLanguesWithSum,
+  getUniqueDevWithSum,
+} from "../utils/functions";
+
+// REDUCERS
 import {
   addIdCtraPtfToStore,
   addActivePtfToStore,
   addTotalMVToStore,
 } from "../reducers/primaryKeys";
-import { fetchPtf, fetchOpe } from "../utils/http";
-import { useState, useEffect } from "react";
+
+// HTTP REQUEST
+import { fetchPtf, fetchOpe, fetchLign } from "../utils/http";
 
 //CHARTJS & TABULATOR
+import { columnsPtf, columnsOpe, optionsTable } from "../data/TabulatorData";
+import { optionsPie } from "../data/ChartData";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
-
-//CUSTOM DATA
-//CHARTJS
-const dataPie = {
-  labels: ["a", "b", "c"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [12, 19, 3],
-    },
-  ],
-};
 
 const Ptf = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [dataPtf, setdataPtf] = useState([]);
   const [dataOpe, setdataOpe] = useState([]);
+  const [dataClasses, setDataClasses] = useState({});
+  const [dataDevises, setDataDevises] = useState({});
   const [error, setError] = useState("");
   const IdCtraCli = useSelector((state) => state.keys.value.IdCtraCli);
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+
+  //CHARTJS DOUGHNUT LABELS AND DATA
+  const dataSetClasses = {
+    labels: dataClasses.uniqueLangues,
+    datasets: [
+      {
+        label: "# of Votes",
+        data: dataClasses.adjustedSumByLangue,
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+      },
+    ],
+  };
+
+  const dataSetDevises = {
+    labels: dataDevises.uniqueLangues,
+    datasets: [
+      {
+        label: "# of Votes",
+        data: dataDevises.adjustedSumByLangue,
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+      },
+    ],
+  };
 
   // GET FETCHING EXAMPLE
   useEffect(() => {
@@ -52,23 +72,38 @@ const Ptf = () => {
       setIsFetching(true);
 
       try {
+        //PORTFOLIOS
         const responsePtf = await fetchPtf({ IdCtraCli });
         console.log(responsePtf);
-        const IdCtraPtfArray = responsePtf.data.map((obj) => {
+        const IdCtraPtf = responsePtf.data.map((obj) => {
           return obj.IdCtraPtf;
         });
-
-        console.log("Ptf IDs", IdCtraPtfArray);
-        dispatch(addIdCtraPtfToStore(IdCtraPtfArray));
-
+        dispatch(addIdCtraPtfToStore(IdCtraPtf));
         dispatch(addTotalMVToStore(responsePtf.totMV));
+        setdataPtf(responsePtf.data);
 
-        const responseOpe = await fetchOpe({ IdCtraPtfArray });
+        console.log("Ptf IDs", IdCtraPtf);
+
+        //OPERATIONS
+        const responseOpe = await fetchOpe({ IdCtraPtf });
         console.log(responseOpe);
         const updateDataOpe = formatISO(responseOpe.data, "DateCptaOPE_lsd");
-
         setdataOpe(updateDataOpe);
-        setdataPtf(responsePtf.data);
+
+        //LIGNES CLASSES FOR DOUGHNUT
+        const responseLignPtf = await fetchLign({ IdCtraPtf });
+        const labelsAndDataClasses = getUniqueLanguesWithSum(
+          responseLignPtf.data,
+          responsePtf.totMV
+        );
+        setDataClasses(labelsAndDataClasses);
+
+        //LIGNES DEVISES FOR DOUGHNUT
+        const labelsAndDataDevises = getUniqueDevWithSum(
+          responseLignPtf.data,
+          responsePtf.totMV
+        );
+        setDataDevises(labelsAndDataDevises);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
       } finally {
@@ -79,6 +114,7 @@ const Ptf = () => {
     fetchDataFromServer(); // Call the renamed local function
   }, []);
 
+  // ROW CLICK TABULATOR
   const rowClick = (e, row) => {
     const activePtf = row.getData();
     dispatch(addActivePtfToStore(activePtf));
@@ -99,7 +135,7 @@ const Ptf = () => {
       <section className={styles.charts_container}>
         <Card title="CLASSES D'ACTIF">
           <Doughnut
-            data={dataPie}
+            data={dataSetClasses}
             width={300}
             height={300}
             options={optionsPie}
@@ -109,7 +145,7 @@ const Ptf = () => {
 
         <Card title="DEVISES">
           <Doughnut
-            data={dataPie}
+            data={dataSetDevises}
             width={300}
             height={300}
             options={optionsPie}

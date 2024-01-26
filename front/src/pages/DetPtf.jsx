@@ -1,11 +1,11 @@
 import styles from "../styles/pages/DetPtf.module.css";
-
 import React from "react";
-
-import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
-import { optionsBar } from "../data/ChartData";
+import Card from "../components/Card";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// ULTILS FUNCTIONS
 import {
   formatISO,
   PCTValCalc,
@@ -13,18 +13,18 @@ import {
   getUniqueLanguesWithSum,
 } from "../utils/functions";
 
-import Card from "../components/Card";
-import { useSelector, useDispatch } from "react-redux";
+//REDUCERS
 import { addActiveLignToStore } from "../reducers/primaryKeys";
+
+// HTTP REQUEST
 import { fetchLign } from "../utils/http";
-import { useState, useEffect } from "react";
 
 //CHARTJS & TABULATOR
+import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
+import { optionsBar } from "../data/ChartData";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
-
-//DUMMY DATA BAR
 
 const Ptf = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -32,6 +32,7 @@ const Ptf = () => {
   const [dataBar, setDataBar] = useState({});
   const [error, setError] = useState("");
 
+  // BAR CHART DATASETS
   const dataBarChart = {
     labels: dataBar.uniqueLangues,
     datasets: [
@@ -104,6 +105,7 @@ const Ptf = () => {
   }, []);
   //
 
+  // ROW CLICK TABULATOR
   const rowClick = (e, row) => {
     console.log(row.getData());
     const IdAsset = row.getData().IdAsset;

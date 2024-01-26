@@ -9,6 +9,11 @@ import Mvt from "./pages/Mvt";
 import Log from "./pages/Log";
 import Layout from "./pages/Layout";
 
+// CHARTJS & PLUGINS
+import { Chart as ChartJS } from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+ChartJS.register(ChartDataLabels);
+
 function App() {
   const router = createBrowserRouter([
     {

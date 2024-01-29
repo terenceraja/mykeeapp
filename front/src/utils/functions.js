@@ -114,3 +114,21 @@ export function getUniqueDevWithSum(arrayOfObjects, mvPtf) {
   // Return an object with uniqueLangues array and adjustedSumByLangue array
   return { uniqueLangues, adjustedSumByLangue: adjustedSumByLangueArray };
 }
+
+export function YTDTimes100(array) {
+  // Iterate through each object in the array
+  array.forEach(function (obj) {
+    // Check if the property exists
+    if (obj.PCTPlusValKpYtoDDevLIGNDebutAnnee_lcn) {
+      // Convert the property value to a number (if it's a valid number)
+      let numericValue = parseFloat(obj.PCTPlusValKpYtoDDevLIGNDebutAnnee_lcn);
+
+      // Check if the conversion was successful and it's a valid number
+      if (!isNaN(numericValue)) {
+        // Multiply the numeric value by 100
+        obj.PCTPlusValKpYtoDDevLIGNDebutAnnee_lcn = numericValue * 100;
+      }
+    }
+  });
+  return array;
+}

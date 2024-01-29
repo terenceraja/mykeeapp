@@ -19,6 +19,7 @@ body {
   display: flex;
   min-width: calc(100% - 150px);
   min-height: 100vh;
+  /* background-color: #f2f4f3; */
   background-color: #f2f4f3;
   padding: 12px;
   box-sizing: border-box;
@@ -50,7 +51,7 @@ body {
 
 /*NAVBAR*/
 h2 {
-  font-size: 11px;
+  font-size: 12px;
   color: white;
   font-family: "Exo";
   margin: 0px;
@@ -78,7 +79,7 @@ input:focus::-webkit-input-placeholder {
 
 /*CARD LABEL*/
 label {
-  background-color: #06171f;
+  background-color: rgb(34, 37, 42);
   color: white;
   font-size: 18px;
   font-family: "Exo", "serif";

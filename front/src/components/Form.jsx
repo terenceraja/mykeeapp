@@ -1,19 +1,27 @@
 import React from "react";
-
 import styles from "../styles/components/Form.module.css";
 
+// REACT
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 
+// HTTP
 import { fetchId } from "../utils/http";
-import { useDispatch } from "react-redux";
+
+// REDUCER
 import { addIdCtraCliToStore } from "../reducers/primaryKeys";
+
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import Alert from "@mui/material/Alert";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const Form = () => {
   // FETCH STATES
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState("");
+  const [serverMessage, setServerMessage] = useState("");
 
   // FORM
   const [form, setForm] = useState({
@@ -54,8 +62,15 @@ const Form = () => {
     if (response.IdCtraCli) {
       console.log(response);
       dispatch(addIdCtraCliToStore(response.IdCtraCli));
-      navigate("/ptf");
+      setTimeout(() => {
+        navigate("/ptf");
+      }, 1500);
     } else {
+      setTimeout(() => {
+        setIsFetching(false);
+        setServerMessage(response.message);
+      }, 1000);
+
       console.log(response);
     }
   };
@@ -79,6 +94,21 @@ const Form = () => {
         autoComplete="current-password"
       />
       <button className={styles.loginBtn}>LOGIN</button>
+      {isFetching ? (
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress />
+        </Box>
+      ) : serverMessage ? (
+        <Alert
+          icon={<ErrorOutlineIcon fontSize="inherit" />}
+          severity="success"
+          color="error"
+        >
+          {serverMessage}
+        </Alert>
+      ) : (
+        <></>
+      )}
     </form>
   );
 };

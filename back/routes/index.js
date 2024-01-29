@@ -19,7 +19,10 @@ router.post("/zctracli", async function (req, res, next) {
     if (!user) {
       res.json({ message: "User not found !", data: user });
     } else {
-      res.json({ message: "User found !", IdCtraCli: user.IdCtraCli });
+      res.json({
+        message: "User found !",
+        IdCtraCli: user.IdCtraCli,
+      });
     }
   } catch (error) {
     console.error(error);

@@ -43,6 +43,7 @@ export const optionsBar = {
     },
   },
   plugins: {
+    tooltip: {},
     legend: {
       display: false,
     },

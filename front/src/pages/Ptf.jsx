@@ -46,7 +46,6 @@ const Ptf = () => {
     labels: dataClasses.uniqueLangues,
     datasets: [
       {
-        label: "CLASSES",
         data: dataClasses.adjustedSumByLangue,
         backgroundColor: [
           "rgba(75, 192, 192, 0.4)",
@@ -68,7 +67,6 @@ const Ptf = () => {
     labels: dataDevises.uniqueLangues,
     datasets: [
       {
-        label: "DEVISES",
         data: dataDevises.adjustedSumByLangue,
         backgroundColor: [
           "rgba(75, 192, 192, 0.4)",

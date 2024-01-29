@@ -11,6 +11,7 @@ import {
   PCTValCalc,
   PCTCalc,
   getUniqueLanguesWithSum,
+  YTDTimes100,
 } from "../utils/functions";
 
 //REDUCERS
@@ -92,7 +93,12 @@ const Ptf = () => {
 
         //DATE FORMAT
         const dataDateFormat = formatISO(dataWithPCT, "DateMaturite_lsd");
-        console.log("Final", dataDateFormat);
+        console.log("date format", dataDateFormat);
+        //
+
+        //YTD * 100 CALC
+        const finalData = YTDTimes100(dataDateFormat);
+        console.log("aze", finalData);
         //
 
         //GET LABELS
@@ -103,7 +109,7 @@ const Ptf = () => {
         setDataBar(labels);
         //
 
-        setDataLignPtf(dataDateFormat);
+        setDataLignPtf(finalData);
       } catch (error) {
         setError({ message: error.message || "custom error message" });
       } finally {

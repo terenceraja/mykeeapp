@@ -6,8 +6,9 @@ export const optionsTable = {
   paginationButtonCount: 3,
   pagination: true,
   paginationSize: 10,
-  paginationSizeSelector: [10, 20, 50],
+  paginationSizeSelector: [25, 50],
 };
+
 //
 
 // TABLE VOS PORTEFEUILLE PAGE PTF
@@ -154,7 +155,7 @@ export const columnsLignPtf = [
   { title: "ISIN", field: "CodeIsin_lst", minWidth: 130, responsive: 0 },
   { title: "DEV", field: "CurrISOCode_lxt", minWidth: 80, responsive: 5 },
   {
-    title: "PMA_lsn",
+    title: "PMA",
     field: "PMA_lsn",
     responsive: 6,
     minWidth: 100,

@@ -96,7 +96,7 @@ const Form = () => {
       <button className={styles.loginBtn}>LOGIN</button>
       {isFetching ? (
         <Box sx={{ width: "100%" }}>
-          <LinearProgress />
+          <LinearProgress color="warning" />
         </Box>
       ) : serverMessage ? (
         <Alert

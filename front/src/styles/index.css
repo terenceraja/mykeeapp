@@ -17,7 +17,7 @@ body {
 /*FULL CONTENT CONTAINER*/
 .outlet {
   display: flex;
-  min-width: calc(100% - 150px);
+  min-width: calc(100% - 200px);
   min-height: 100vh;
   /* background-color: #f2f4f3; */
   background-color: #f2f4f3;

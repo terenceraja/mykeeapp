@@ -7,6 +7,7 @@ export const optionsTable = {
   pagination: true,
   paginationSize: 10,
   paginationSizeSelector: [25, 50],
+  placeholder: "No Data Available",
 };
 
 //

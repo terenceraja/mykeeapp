@@ -43,7 +43,12 @@ export const optionsBar = {
     },
   },
   plugins: {
-    tooltip: {},
+    tooltip: {
+      label: function (context) {
+        console.log(context[0].data);
+        return "yo";
+      },
+    },
     legend: {
       display: false,
     },

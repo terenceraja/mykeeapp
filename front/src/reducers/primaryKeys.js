@@ -36,6 +36,17 @@ export const keysSlice = createSlice({
     addTotalMVToStore: (state, action) => {
       state.value.TotalMV = action.payload;
     },
+    clearStore: (state, action) => {
+      state.value = {
+        ...state.value,
+        IdCtraCli: null,
+        IdCrtaPTF: [],
+        IdLigne: null,
+        activePtf: {},
+        activeLign: {},
+        TotalMV: null,
+      };
+    },
   },
 });
 
@@ -46,5 +57,6 @@ export const {
   addActivePtfToStore,
   addActiveLignToStore,
   addTotalMVToStore,
+  clearStore,
 } = keysSlice.actions;
 export default keysSlice.reducer;

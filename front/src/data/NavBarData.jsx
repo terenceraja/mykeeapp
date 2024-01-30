@@ -11,11 +11,9 @@ import chat from "../assets/chat.svg";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FolderIcon from "@mui/icons-material/Folder";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import ForumIcon from "@mui/icons-material/Forum";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import FolderCopyIcon from "@mui/icons-material/FolderCopy";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 
@@ -33,11 +31,7 @@ export const NavBarData = [
 const iconCss = {
   fontSize: "20px",
   color: "white",
-  transition: "color 0.3s ease-in-out", // Add a smooth transition effect
-  "&:hover": {
-    color: "white",
-  },
-  margin: "0px 15px",
+  margin: "0px 25px",
 };
 export const NavBarData2 = [
   {

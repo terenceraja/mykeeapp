@@ -83,7 +83,7 @@ const iconCssMobile = {
   "&:hover": {
     color: "#06171f",
   },
-  padding: "0px 10px",
+  padding: "0px 5px",
 };
 export const NavBarData2Mobile = [
   {

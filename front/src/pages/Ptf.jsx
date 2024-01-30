@@ -24,7 +24,7 @@ import { fetchPtf, fetchOpe, fetchLign } from "../utils/http";
 
 //CHARTJS & TABULATOR
 import { columnsPtf, columnsOpe, optionsTable } from "../data/TabulatorData";
-import { optionsPie } from "../data/ChartData";
+import { optionsPie, labels } from "../data/ChartData";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
@@ -43,7 +43,8 @@ const Ptf = () => {
 
   //CHARTJS DOUGHNUT LABELS AND DATA
   const dataSetClasses = {
-    labels: dataClasses.uniqueLangues,
+    // labels: dataClasses.uniqueLangues, // SWITCH IF NEEDED
+    labels: labels,
     datasets: [
       {
         data: dataClasses.adjustedSumByLangue,

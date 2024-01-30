@@ -1,10 +1,17 @@
 //DOUGHNUT CHART OPTIONS
+
 export const optionsPie = {
   maintainAspectRatio: false, // Don't maintain w/h ratio
   plugins: {
     legend: {
       display: true,
-      position: "bottom", // Position the legend at the bottom
+      position: "left", // Position the legend at the bottom
+      labels: {
+        padding: 20,
+        font: {
+          size: 12,
+        },
+      },
     },
     datalabels: {
       formatter: (val) => {
@@ -14,14 +21,16 @@ export const optionsPie = {
       align: "end",
 
       font: {
-        size: 9,
+        size: 12,
       },
     },
   },
   layout: {
     padding: {
-      top: 10,
+      top: 30,
       bottom: 20,
+      left: 50,
+      right: 50,
     },
   },
 };
@@ -43,12 +52,7 @@ export const optionsBar = {
     },
   },
   plugins: {
-    tooltip: {
-      label: function (context) {
-        console.log(context[0].data);
-        return "yo";
-      },
-    },
+    tooltip: {},
     legend: {
       display: false,
     },

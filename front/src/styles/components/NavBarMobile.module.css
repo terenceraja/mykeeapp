@@ -49,6 +49,6 @@
 #logoutBtn {
   display: flex;
   align-items: center;
-  width: 25px;
-  margin-left: 10px;
+
+  box-sizing: border-box;
 }

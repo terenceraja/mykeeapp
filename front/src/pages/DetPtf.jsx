@@ -22,7 +22,7 @@ import { fetchLign } from "../utils/http";
 
 //CHARTJS & TABULATOR
 import { columnsLignPtf, optionsTable } from "../data/TabulatorData";
-import { optionsBar } from "../data/ChartData";
+import { optionsBar, labels } from "../data/ChartData";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { ReactTabulator } from "react-tabulator";
@@ -35,7 +35,8 @@ const Ptf = () => {
 
   // BAR CHART DATASETS
   const dataBarChart = {
-    labels: dataBar.uniqueLangues,
+    // labels: dataBar.uniqueLangues SWITCH IF NEEDED FOR UNIQUE LABELS IN DATA
+    labels: labels,
     datasets: [
       {
         data: dataBar.adjustedSumByLangue,
@@ -52,7 +53,7 @@ const Ptf = () => {
           "rgba(255, 165, 0, 0.8)",
         ],
         borderWidth: 1,
-        label: "My Dataset",
+        label: "%",
         barThickness: 50,
       },
     ],

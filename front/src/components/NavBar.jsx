@@ -7,6 +7,7 @@ import { useState } from "react";
 import styles from "../styles/components/NavBar.module.css";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
+import { NavLink } from "react-router-dom";
 
 //REDUCERS
 import { clearStore } from "../reducers/primaryKeys";
@@ -39,12 +40,18 @@ const NavBar = () => {
   const navList = NavBarData2.map((item, key) => {
     return (
       <li key={key} className={styles.nav_row}>
-        <Link className={styles.link} to={item.path}>
+        <NavLink
+          className={styles.link}
+          style={({ isActive }) => ({
+            backgroundColor: isActive ? "#8e8f91" : "",
+          })}
+          to={item.path}
+        >
           {/* <img src={item.icon} className={styles.icons} alt="navLogo" /> */}
           {item.icon}
 
           <h2>{item.label}</h2>
-        </Link>
+        </NavLink>
       </li>
     );
   });

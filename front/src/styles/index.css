@@ -41,7 +41,6 @@ body {
     background-color: #f2f4f3;
     padding: 12px;
     box-sizing: border-box;
-    flex: 1; /* Allow .outlet to take remaining vertical space */
   }
 }
 

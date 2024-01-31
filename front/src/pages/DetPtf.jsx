@@ -32,11 +32,12 @@ const Ptf = () => {
   const [dataLignPtf, setDataLignPtf] = useState([]);
   const [dataBar, setDataBar] = useState({});
   const [error, setError] = useState("");
+  console.log(dataBar);
 
   // BAR CHART DATASETS
   const dataBarChart = {
-    // labels: dataBar.uniqueLangues SWITCH IF NEEDED FOR UNIQUE LABELS IN DATA
-    labels: labels,
+    labels: dataBar.uniqueLangues,
+    // labels: labels,
     datasets: [
       {
         data: dataBar.adjustedSumByLangue,
@@ -45,12 +46,16 @@ const Ptf = () => {
           "rgba(65, 105, 225, 0.4)",
           "rgba(255, 192, 203, 0.4)",
           "rgba(255, 165, 0, 0.4)",
+          "rgba(255, 99, 71, 0.4)",
+          "rgba(128, 0, 128, 0.4)",
         ],
         borderColor: [
           "rgba(75, 192, 192, 0.8)",
           "rgba(65, 105, 225, 0.8)",
           "rgba(255, 192, 203, 0.8)",
           "rgba(255, 165, 0, 0.8)",
+          "rgba(255, 99, 71, 0.4)",
+          "rgba(128, 0, 128, 0.4)",
         ],
         borderWidth: 1,
         label: "%",

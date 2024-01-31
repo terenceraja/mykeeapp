@@ -9,7 +9,7 @@ const Log = () => {
       <div className={styles.log_card}>
         <section className={styles.logo_section}>
           <img src={logo} alt="logo" id={styles.logo} />
-          <h3>Welcome to MyKeeApp</h3>
+          <h3>Welcome to myKeeApp</h3>
         </section>
 
         <Form />

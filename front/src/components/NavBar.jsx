@@ -1,13 +1,21 @@
+// REACT
 import React, { useEffect } from "react";
-import { NavBarData, NavBarData2 } from "../data/NavBarData.jsx";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 import styles from "../styles/components/NavBar.module.css";
+import { NavBarData, NavBarData2 } from "../data/NavBarData.jsx";
+//MODAL LOGOUT
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
-import { NavLink } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 //REDUCERS
 import { clearStore } from "../reducers/primaryKeys";
@@ -20,6 +28,12 @@ const logoutCSS = {
 };
 
 const NavBar = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,8 +47,13 @@ const NavBar = () => {
     dispatch(clearStore());
     setTimeout(() => {
       setIsLoggingOut((prev) => !prev);
+      setOpen(false);
       navigate("/");
     }, 1200);
+  };
+
+  const handleOpenModal = () => {
+    setOpen(true);
   };
 
   const navList = NavBarData2.map((item, key) => {
@@ -61,7 +80,7 @@ const NavBar = () => {
       <ul className={styles.nav_rows_container}>
         {navList}
         <button
-          onClick={() => handleLogout()}
+          onClick={() => handleOpenModal()} // HANDLE MODAALL
           id={styles.logoutBtn}
           className={styles.link}
         >
@@ -69,11 +88,36 @@ const NavBar = () => {
           <h2>DECONNEXION</h2>
         </button>
       </ul>
-      {isLoggingOut && (
-        <Box sx={{ width: "100%" }}>
-          <LinearProgress color="warning" />
-        </Box>
-      )}
+
+      <>
+        <Dialog
+          open={open}
+          onClose={handleCloseModal}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Use Google's location service?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Cette action mettra fin à votre session. Êtes-vous certain(e) de
+              vouloir vous déconnecter ?
+              {isLoggingOut && (
+                <Box sx={{ width: "100%" }}>
+                  <LinearProgress color="warning" />
+                </Box>
+              )}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseModal}>Anuller</Button>
+            <Button color="warning" onClick={handleLogout} autoFocus>
+              Se Deconnecter
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </>
     </nav>
   );
 };

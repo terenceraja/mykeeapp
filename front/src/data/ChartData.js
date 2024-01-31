@@ -5,7 +5,7 @@ export const optionsPie = {
   plugins: {
     legend: {
       display: true,
-      position: "left", // Position the legend at the bottom
+      position: "bottom", // Position the legend at the bottom
       labels: {
         padding: 20,
         font: {
@@ -27,10 +27,10 @@ export const optionsPie = {
   },
   layout: {
     padding: {
-      top: 30,
-      bottom: 20,
-      left: 50,
-      right: 50,
+      top: 10,
+      bottom: 10,
+      left: 10,
+      right: 10,
     },
   },
 };

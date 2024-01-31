@@ -17,7 +17,10 @@ router.post("/zctracli", async function (req, res, next) {
 
     console.log(user);
     if (!user) {
-      res.json({ message: "User not found !", data: user });
+      res.json({
+        message: "Identifiants incorrects, veuillez réessayer.",
+        data: user,
+      });
     } else {
       res.json({
         message: "User found !",
